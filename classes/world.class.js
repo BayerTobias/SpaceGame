@@ -1,5 +1,6 @@
 class World {
   character = new Character();
+  playeExhaust = new Exhaust();
   enemies = [new EnemyShip(), new EnemyShip(), new EnemyShip()];
   background = [new Background()];
   canvas;
@@ -16,6 +17,7 @@ class World {
 
     this.addObjectsToMap(this.background);
     this.addToMap(this.character);
+    this.addToMap(this.playeExhaust);
     this.addObjectsToMap(this.enemies);
 
     let self = this;
