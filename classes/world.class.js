@@ -5,11 +5,14 @@ class World {
   background = [new Background()];
   canvas;
   ctx;
+  keyboard;
 
-  constructor(canvas) {
+  constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
+    this.keyboard = keyboard;
     this.draw();
+    this.setWorld();
   }
 
   draw() {
@@ -24,6 +27,11 @@ class World {
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  setWorld() {
+    this.character.world = this;
+    this.playeExhaust.world = this;
   }
 
   addToMap(object) {
