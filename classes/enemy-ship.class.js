@@ -8,8 +8,6 @@ class EnemyShip extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
-      this.x -= 0.25 + Math.random() * 0.25;
-    }, 1000 / 60);
+    this.moveLeft();
   }
 }

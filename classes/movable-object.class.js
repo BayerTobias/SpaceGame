@@ -5,6 +5,7 @@ class MovableObject {
   height = 128;
   width = 128;
   imgCache = {};
+  speed = 0.25 + Math.random() * 0.25;
 
   constructor() {}
 
@@ -21,5 +22,28 @@ class MovableObject {
     });
   }
 
-  moveRight() {}
+  moveRight() {
+    this.x += this.speed;
+  }
+
+  moveLeft() {
+    setInterval(() => {
+      this.x -= this.speed;
+    }, 1000 / 60);
+  }
+
+  handleCharacterMovement() {
+    if (keyboard.right) {
+      this.x += this.speed;
+    }
+    if (keyboard.left) {
+      this.x -= this.speed;
+    }
+    if (keyboard.up) {
+      this.y -= this.speed;
+    }
+    if (keyboard.down) {
+      this.y += this.speed;
+    }
+  }
 }

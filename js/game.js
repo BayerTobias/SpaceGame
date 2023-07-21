@@ -8,15 +8,23 @@ function init() {
 }
 
 window.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowRight") {
-    keyboard.right = true;
-  }
-  console.log(event);
+  handleKeyPress(event.code, "ArrowRight", "right", true);
+  handleKeyPress(event.code, "ArrowLeft", "left", true);
+  handleKeyPress(event.code, "ArrowDown", "down", true);
+  handleKeyPress(event.code, "ArrowUp", "up", true);
+  console.log(keyboard);
 });
 
 window.addEventListener("keyup", (event) => {
-  if (event.code === "ArrowRight") {
-    keyboard.right = false;
-  }
-  console.log(event);
+  handleKeyPress(event.code, "ArrowRight", "right", false);
+  handleKeyPress(event.code, "ArrowLeft", "left", false);
+  handleKeyPress(event.code, "ArrowDown", "down", false);
+  handleKeyPress(event.code, "ArrowUp", "up", false);
+  console.log(keyboard);
 });
+
+function handleKeyPress(pressedKey, keyCode, keybordKey, status) {
+  if (pressedKey === keyCode) {
+    keyboard[keybordKey] = status;
+  }
+}
