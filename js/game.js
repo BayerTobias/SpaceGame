@@ -12,7 +12,6 @@ window.addEventListener("keydown", (event) => {
   handleKeyPress(event.code, "ArrowLeft", "left", true);
   handleKeyPress(event.code, "ArrowDown", "down", true);
   handleKeyPress(event.code, "ArrowUp", "up", true);
-  console.log(keyboard);
 });
 
 window.addEventListener("keyup", (event) => {
@@ -20,7 +19,6 @@ window.addEventListener("keyup", (event) => {
   handleKeyPress(event.code, "ArrowLeft", "left", false);
   handleKeyPress(event.code, "ArrowDown", "down", false);
   handleKeyPress(event.code, "ArrowUp", "up", false);
-  console.log(keyboard);
 });
 
 function handleKeyPress(pressedKey, keyCode, keybordKey, status) {

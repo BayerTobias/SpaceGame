@@ -1,7 +1,12 @@
 class World {
   character = new Character();
-  playeExhaust = new Exhaust();
+  playeExhaust = new playerExhaust();
   enemies = [new EnemyShip(), new EnemyShip(), new EnemyShip()];
+  enemiesExhaust = [
+    new enemyExhaust(0),
+    new enemyExhaust(1),
+    new enemyExhaust(2),
+  ];
   background = [new Background()];
   canvas;
   ctx;
@@ -19,9 +24,10 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.addObjectsToMap(this.background);
+    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.enemiesExhaust);
     this.addToMap(this.character);
     this.addToMap(this.playeExhaust);
-    this.addObjectsToMap(this.enemies);
 
     let self = this;
     requestAnimationFrame(function () {
@@ -32,9 +38,18 @@ class World {
   setWorld() {
     this.character.world = this;
     this.playeExhaust.world = this;
+    this.enemiesExhaust.forEach((element) => {
+      element.world = this;
+    });
   }
 
   addToMap(object) {
+    if (object.otherDirection) {
+      this.ctx.save();
+      this.ctx.translate(object.width, 0);
+      this.ctx.scale(-1, 1);
+      object.x = object.x * -1;
+    }
     this.ctx.drawImage(
       object.img,
       object.x,
@@ -42,6 +57,10 @@ class World {
       object.width,
       object.height
     );
+    if (object.otherDirection) {
+      object.x = object.x * -1;
+      this.ctx.restore();
+    }
   }
 
   addObjectsToMap(objects) {

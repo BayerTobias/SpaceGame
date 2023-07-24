@@ -5,7 +5,9 @@ class MovableObject {
   height = 128;
   width = 128;
   imgCache = {};
-  speed = 0.25 + Math.random() * 0.25;
+  speed = 0.5 + Math.random() * 0.5;
+  fps = 60;
+  otherDirection = false;
 
   constructor() {}
 
@@ -22,14 +24,11 @@ class MovableObject {
     });
   }
 
-  moveRight() {
-    this.x += this.speed;
-  }
-
   moveLeft() {
+    this.otherDirection = true;
     setInterval(() => {
       this.x -= this.speed;
-    }, 1000 / 60);
+    }, 1000 / this.fps);
   }
 
   handleCharacterMovement() {
@@ -45,5 +44,12 @@ class MovableObject {
     if (keyboard.down) {
       this.y += this.speed;
     }
+  }
+
+  animateImages(images) {
+    let i = this.currentImage % images.length;
+    let path = images[i];
+    this.img = this.imgCache[path];
+    this.currentImage++;
   }
 }

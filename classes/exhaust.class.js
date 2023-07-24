@@ -1,4 +1,4 @@
-class Exhaust extends Character {
+class playerExhaust extends MovableObject {
   x = 20;
   y = 193;
   height = 50;
@@ -13,7 +13,6 @@ class Exhaust extends Character {
   ];
   currentImage = 0;
   world;
-  speed = 1;
 
   constructor() {
     super().loadImage("../el-pollo-loco/img/player-ship/Exhaust3/fire1.png");
@@ -29,12 +28,14 @@ class Exhaust extends Character {
         keyboard.down ||
         keyboard.left
       ) {
-        this.handleCharacterMovement();
-        let i = this.currentImage % this.imagesExhaustAnimation.length;
-        let path = this.imagesExhaustAnimation[i];
-        this.img = this.imgCache[path];
-        this.currentImage++;
+        this.handleExhaustMovement();
+        this.animateImages(this.imagesExhaustAnimation);
       }
-    }, 1000 / 30);
+    }, 1000 / this.fps);
+  }
+
+  handleExhaustMovement() {
+    this.x = this.world.character.x - 32;
+    this.y = this.world.character.y + 43;
   }
 }

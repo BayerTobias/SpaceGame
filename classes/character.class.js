@@ -17,6 +17,6 @@ class Character extends MovableObject {
       ) {
         this.handleCharacterMovement();
       }
-    }, 1000 / 30);
+    }, 1000 / this.fps);
   }
 }
