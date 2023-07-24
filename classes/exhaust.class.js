@@ -37,19 +37,4 @@ class Exhaust extends Character {
       }
     }, 1000 / 30);
   }
-
-  handleCharacterMovement() {
-    if (keyboard.right) {
-      this.x += this.speed;
-    }
-    if (keyboard.left) {
-      this.x -= this.speed;
-    }
-    if (keyboard.up) {
-      this.y -= this.speed;
-    }
-    if (keyboard.down) {
-      this.y += this.speed;
-    }
-  }
 }
