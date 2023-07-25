@@ -24,25 +24,45 @@ class MovableObject {
     });
   }
 
+  moveRight() {
+    this.x += this.speed;
+  }
+
   moveLeft() {
-    this.otherDirection = true;
-    setInterval(() => {
-      this.x -= this.speed;
-    }, 1000 / this.fps);
+    this.x -= this.speed;
+  }
+
+  moveUp() {
+    this.y -= this.speed;
+  }
+
+  moveDown() {
+    this.y += this.speed;
+  }
+
+  movementKeyIsPressed() {
+    if (
+      (this.world && this.world.keyboard.right) ||
+      keyboard.up ||
+      keyboard.down ||
+      keyboard.left
+    ) {
+      return true;
+    }
   }
 
   handleCharacterMovement() {
     if (keyboard.right) {
-      this.x += this.speed;
+      this.moveRight();
     }
     if (keyboard.left) {
-      this.x -= this.speed;
+      this.moveLeft();
     }
     if (keyboard.up) {
-      this.y -= this.speed;
+      this.moveUp();
     }
     if (keyboard.down) {
-      this.y += this.speed;
+      this.moveDown();
     }
   }
 
@@ -51,5 +71,18 @@ class MovableObject {
     let path = images[i];
     this.img = this.imgCache[path];
     this.currentImage++;
+  }
+
+  draw(ctx) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+  // delete b4 game finished
+  drawImgBorder(ctx) {
+    ctx.beginPath();
+    ctx.lineWidth = "2";
+    ctx.strokeStyle = "blue";
+    ctx.rect(this.x, this.y, this.width, this.height);
+    ctx.stroke();
   }
 }

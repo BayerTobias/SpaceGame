@@ -1,16 +1,10 @@
 class World {
-  character = new Character();
-  playeExhaust = new playerExhaust();
-  enemies = [new EnemyShip(), new EnemyShip(), new EnemyShip()];
-  enemiesExhaust = [
-    new enemyExhaust(0),
-    new enemyExhaust(1),
-    new enemyExhaust(2),
-  ];
-  background = [new Background()];
+  level = level1;
+
   canvas;
   ctx;
   keyboard;
+  camera_x = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -18,16 +12,19 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
+    // this.startSidescroll();
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    this.addObjectsToMap(this.background);
-    this.addObjectsToMap(this.enemies);
-    this.addObjectsToMap(this.enemiesExhaust);
-    this.addToMap(this.character);
-    this.addToMap(this.playeExhaust);
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.level.background);
+    this.addObjectsToMap(this.level.mapElements);
+    this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.enemiesExhaust);
+    this.addToMap(this.level.character);
+    this.addToMap(this.level.playeExhaust);
+    this.ctx.translate(+this.camera_x, 0);
 
     let self = this;
     requestAnimationFrame(function () {
@@ -36,36 +33,49 @@ class World {
   }
 
   setWorld() {
-    this.character.world = this;
-    this.playeExhaust.world = this;
-    this.enemiesExhaust.forEach((element) => {
+    this.level.character.world = this;
+    this.level.playeExhaust.world = this;
+    this.level.background.world = this;
+    this.level.enemiesExhaust.forEach((element) => {
       element.world = this;
     });
   }
 
   addToMap(object) {
     if (object.otherDirection) {
-      this.ctx.save();
-      this.ctx.translate(object.width, 0);
-      this.ctx.scale(-1, 1);
-      object.x = object.x * -1;
+      this.flipImage(object);
     }
-    this.ctx.drawImage(
-      object.img,
-      object.x,
-      object.y,
-      object.width,
-      object.height
-    );
+    object.draw(this.ctx);
+    object.drawImgBorder(this.ctx); //delete b4 game finished
     if (object.otherDirection) {
-      object.x = object.x * -1;
-      this.ctx.restore();
+      this.flipImageBack(object);
     }
+  }
+
+  flipImage(object) {
+    this.ctx.save();
+    this.ctx.translate(object.width, 0);
+    this.ctx.scale(-1, 1);
+    object.x = object.x * -1;
+  }
+
+  flipImageBack(object) {
+    object.x = object.x * -1;
+    this.ctx.restore();
   }
 
   addObjectsToMap(objects) {
     objects.forEach((object) => {
       this.addToMap(object);
     });
+  }
+
+  //this.level.levelEnd_X
+  startSidescroll() {
+    setInterval(() => {
+      if (this.camera_x < 1060) {
+        this.camera_x += 1;
+      }
+    }, 1000 / 60);
   }
 }

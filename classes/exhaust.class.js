@@ -22,12 +22,7 @@ class playerExhaust extends MovableObject {
 
   animate() {
     setInterval(() => {
-      if (
-        (this.world && this.world.keyboard.right) ||
-        keyboard.up ||
-        keyboard.down ||
-        keyboard.left
-      ) {
+      if (this.movementKeyIsPressed()) {
         this.handleExhaustMovement();
         this.animateImages(this.imagesExhaustAnimation);
       }
@@ -35,7 +30,7 @@ class playerExhaust extends MovableObject {
   }
 
   handleExhaustMovement() {
-    this.x = this.world.character.x - 32;
-    this.y = this.world.character.y + 43;
+    this.x = this.world.level.character.x - 32;
+    this.y = this.world.level.character.y + 43;
   }
 }
