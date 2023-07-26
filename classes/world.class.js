@@ -12,6 +12,7 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
+    this.checkCollisions();
     // this.startSidescroll();
   }
 
@@ -47,6 +48,7 @@ class World {
     }
     object.draw(this.ctx);
     object.drawImgBorder(this.ctx); //delete b4 game finished
+    object.drawHitBox(this.ctx);
     if (object.otherDirection) {
       this.flipImageBack(object);
     }
@@ -77,5 +79,24 @@ class World {
         this.camera_x += 1;
       }
     }, 1000 / 60);
+  }
+
+  checkCollisions() {
+    let character = this.level.character;
+    setInterval(() => {
+      this.level.enemies.forEach((enemy) => {
+        if (character.isColliding(enemy)) {
+          character.isHit();
+
+          console.log("DEAD", character.HP);
+          character.isDead();
+        }
+      });
+      this.level.mapElements.forEach((element) => {
+        if (character.isColliding(element)) {
+          console.log("DEAD", element);
+        }
+      });
+    }, 100);
   }
 }

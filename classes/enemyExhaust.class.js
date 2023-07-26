@@ -29,7 +29,8 @@ class enemyExhaust extends MovableObject {
   }
 
   positionExhaust() {
-    this.x = this.world.level.enemies[this.exhaustNumber].x + 95; // todo nicht fixed sonder mit img größe positionieren
-    this.y = this.world.level.enemies[this.exhaustNumber].y + 39; // todo nicht fixed sonder mit img größe positionieren
+    const enemy = this.world.level.enemies[this.exhaustNumber];
+    this.x = enemy.x + 72; // todo nicht fixed sonder mit img größe positionieren
+    this.y = enemy.y + 25; // todo nicht fixed sonder mit img größe positionieren
   }
 }

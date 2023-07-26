@@ -4,8 +4,9 @@ class Character extends MovableObject {
   flyingSound = new Audio("../el-pollo-loco/audio/rocket-trust.mp3");
 
   constructor() {
-    super().loadImage("../el-pollo-loco/img/player-ship/Ship3.png");
+    super().loadImage("../el-pollo-loco/img/player-ship/ship_asset7.png");
     this.animate();
+    this.offsetY = 25;
   }
 
   animate() {
@@ -17,16 +18,5 @@ class Character extends MovableObject {
         this.flyingSound.pause();
       }
     }, 1000 / this.fps);
-  }
-
-  movementKeyIsPressed() {
-    if (
-      (this.world && this.world.keyboard.right) ||
-      keyboard.up ||
-      keyboard.down ||
-      keyboard.left
-    ) {
-      return true;
-    }
   }
 }
