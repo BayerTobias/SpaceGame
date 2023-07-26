@@ -94,7 +94,8 @@ class World {
       });
       this.level.mapElements.forEach((element) => {
         if (character.isColliding(element)) {
-          console.log("DEAD", element);
+          character.kill();
+          console.log("DEAD", character.HP);
         }
       });
     }, 100);
