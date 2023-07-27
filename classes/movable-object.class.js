@@ -1,31 +1,32 @@
-class MovableObject {
-  x = 50;
-  y = 150;
+class MovableObject extends DrawableObject {
   offsetX = 0;
   offsetY = 0;
-  img;
-  height = 100;
-  width = 100;
   imgCache = {};
+  currentImage = 0;
   speed = 0.5 + Math.random() * 0.5;
   fps = 60;
   otherDirection = false;
 
   HP = 100;
+  lastHit;
 
-  constructor() {}
-
-  loadImage(path) {
-    this.img = new Image();
-    this.img.src = path;
+  constructor() {
+    super();
   }
 
-  loadImages(array) {
-    array.forEach((path) => {
-      let img = new Image();
-      img.src = path;
-      this.imgCache[path] = img;
-    });
+  handleCharacterMovement() {
+    if (keyboard.right) {
+      this.moveRight();
+    }
+    if (keyboard.left) {
+      this.moveLeft();
+    }
+    if (keyboard.up) {
+      this.moveUp();
+    }
+    if (keyboard.down) {
+      this.moveDown();
+    }
   }
 
   moveRight() {
@@ -55,30 +56,11 @@ class MovableObject {
     }
   }
 
-  handleCharacterMovement() {
-    if (keyboard.right) {
-      this.moveRight();
-    }
-    if (keyboard.left) {
-      this.moveLeft();
-    }
-    if (keyboard.up) {
-      this.moveUp();
-    }
-    if (keyboard.down) {
-      this.moveDown();
-    }
-  }
-
   animateImages(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imgCache[path];
     this.currentImage++;
-  }
-
-  draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   // delete b4 game finished
@@ -136,6 +118,8 @@ class MovableObject {
     this.HP -= 10;
     if (this.HP < 0) {
       this.HP = 0;
+    } else {
+      this, (this.lastHit = new Date().getTime());
     }
   }
 
@@ -143,5 +127,9 @@ class MovableObject {
     this.HP = 0;
   }
 
-  isHurt() {}
+  isHurt() {
+    const timePassed = new Date().getTime() - this.lastHit;
+
+    return timePassed < 800;
+  }
 }

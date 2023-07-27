@@ -1,0 +1,1 @@
+class Interface extends DrawableObject {}
