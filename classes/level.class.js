@@ -6,6 +6,7 @@ class Level {
   background;
   mapElements;
   levelEnd_X; //endboss x koordinate
+  gameInterface;
 
   constructor(
     character,
@@ -13,7 +14,8 @@ class Level {
     enemies,
     enemiesExhaust,
     background,
-    mapElements
+    mapElements,
+    gameInterface
   ) {
     this.character = character;
     this.playeExhaust = playeExhaust;
@@ -21,5 +23,6 @@ class Level {
     this.enemiesExhaust = enemiesExhaust;
     this.background = background;
     this.mapElements = mapElements;
+    this.gameInterface = gameInterface;
   }
 }

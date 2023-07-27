@@ -25,6 +25,7 @@ class World {
     this.addObjectsToMap(this.level.enemiesExhaust);
     this.addToMap(this.level.character);
     this.addToMap(this.level.playeExhaust);
+    this.addObjectsToMap(this.level.gameInterface);
     this.ctx.translate(+this.camera_x, 0);
 
     let self = this;
@@ -40,6 +41,9 @@ class World {
     this.level.enemiesExhaust.forEach((element) => {
       element.world = this;
     });
+    this.level.gameInterface.forEach((element) => {
+      element.world = this;
+    });
   }
 
   addToMap(object) {
@@ -47,8 +51,10 @@ class World {
       this.flipImage(object);
     }
     object.draw(this.ctx);
+
     object.drawImgBorder(this.ctx); //delete b4 game finished
-    object.drawHitBox(this.ctx);
+    object.drawHitBox(this.ctx); //delete b4 game finished
+
     if (object.otherDirection) {
       this.flipImageBack(object);
     }

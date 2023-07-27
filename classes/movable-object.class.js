@@ -1,13 +1,14 @@
 class MovableObject extends DrawableObject {
   offsetX = 0;
   offsetY = 0;
-  imgCache = {};
+
   currentImage = 0;
   speed = 0.5 + Math.random() * 0.5;
   fps = 60;
   otherDirection = false;
 
   HP = 100;
+  shield = 0;
   lastHit;
 
   constructor() {
@@ -63,42 +64,6 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
-  // delete b4 game finished
-  drawImgBorder(ctx) {
-    if (
-      this instanceof EnemyShip ||
-      this instanceof Character ||
-      this instanceof EndBoss ||
-      this instanceof MapElement
-    ) {
-      ctx.beginPath();
-      ctx.lineWidth = "2";
-      ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    }
-  }
-
-  drawHitBox(ctx) {
-    if (
-      this instanceof EnemyShip ||
-      this instanceof Character ||
-      this instanceof EndBoss ||
-      this instanceof MapElement
-    ) {
-      ctx.beginPath();
-      ctx.lineWidth = "2";
-      ctx.strokeStyle = "red";
-      ctx.rect(
-        this.x + this.offsetX,
-        this.y + this.offsetY,
-        this.width - 2 * this.offsetX,
-        this.height - 2 * this.offsetY
-      );
-      ctx.stroke();
-    }
-  }
-
   // Bessere Formel zur Kollisionsberechnung (Genauer)
   isColliding(object) {
     return (
@@ -115,11 +80,13 @@ class MovableObject extends DrawableObject {
   }
 
   isHit() {
-    this.HP -= 10;
-    if (this.HP < 0) {
-      this.HP = 0;
-    } else {
-      this, (this.lastHit = new Date().getTime());
+    if (!this.isHurt()) {
+      this.HP -= 10;
+      if (this.HP < 0) {
+        this.HP = 0;
+      } else {
+        this, (this.lastHit = new Date().getTime());
+      }
     }
   }
 
