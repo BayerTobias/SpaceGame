@@ -1,4 +1,6 @@
 class HpBar extends StatusBar {
+  y = 420;
+
   images = [
     "../el-pollo-loco/img/interface/hit_points0.png",
     "../el-pollo-loco/img/interface/hit_points20.png",
@@ -13,7 +15,6 @@ class HpBar extends StatusBar {
     this.loadImage("../el-pollo-loco/img/interface/hit_points100.png");
     this.loadImages(this.images);
     this.checkPercent();
-    this.y = 50;
   }
 
   checkPercent() {

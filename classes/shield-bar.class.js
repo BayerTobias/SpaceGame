@@ -1,4 +1,6 @@
 class ShieldBar extends StatusBar {
+  y = 440;
+
   images = [
     "../el-pollo-loco/img/interface/defence0.png",
     "../el-pollo-loco/img/interface/defence20.png",
@@ -10,7 +12,7 @@ class ShieldBar extends StatusBar {
 
   constructor() {
     super();
-    this.loadImage("../el-pollo-loco/img/interface/defence100.png");
+    this.loadImage("../el-pollo-loco/img/interface/defence0.png");
     this.loadImages(this.images);
     this.checkPercent();
   }

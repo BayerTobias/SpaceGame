@@ -3,11 +3,17 @@ class MapElement extends MovableObject {
   y = 250;
   width = 60;
   height = 60;
+  offsetY = 20;
 
-  constructor(x, y, width, height) {
-    super().loadImage(
-      "../el-pollo-loco/img/map-elements/stone_0001_Layer-49.png"
-    );
+  mapImages = [
+    "../el-pollo-loco/img/map-elements/bottom-stone-tile1.png",
+    "../el-pollo-loco/img/map-elements/bottom-stone-tile2.png",
+    "../el-pollo-loco/img/map-elements/top-stone-tile1.png",
+    "../el-pollo-loco/img/map-elements/top-stone-tile2.png",
+  ];
+
+  constructor(x, y, width, height, index) {
+    super().loadImage(this.mapImages[index]);
     this.x = x;
     this.y = y;
     this.width = width;

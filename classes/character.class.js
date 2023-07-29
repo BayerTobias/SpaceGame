@@ -1,5 +1,6 @@
 class Character extends MovableObject {
   world;
+  offsetY = 25;
   speed = 4;
   shipIMG = "../el-pollo-loco/img/player-ship/ship_asset7.png";
   flyingSound = new Audio("../el-pollo-loco/audio/rocket-trust.mp3");
@@ -36,7 +37,6 @@ class Character extends MovableObject {
     this.loadImages(this.damageAnimation);
     this.loadImages(this.deathAnimation);
     this.animate();
-    this.offsetY = 25;
   }
 
   animate() {
@@ -51,6 +51,8 @@ class Character extends MovableObject {
       if (this.movementKeyIsPressed()) {
         this.handleCharacterMovement();
         this.flyingSound.play();
+      } else if (this.shootKeyIsPressed()) {
+        this.handleCharacterMovement();
       } else {
         this.flyingSound.pause();
       }

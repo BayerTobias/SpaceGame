@@ -1,6 +1,9 @@
 class World {
   level = level1;
 
+  playerShots = [];
+  enemyShots = [];
+
   canvas;
   ctx;
   keyboard;
@@ -25,8 +28,9 @@ class World {
     this.addObjectsToMap(this.level.enemiesExhaust);
     this.addToMap(this.level.character);
     this.addToMap(this.level.playeExhaust);
-    this.addObjectsToMap(this.level.gameInterface);
+    this.addObjectsToMap(this.playerShots);
     this.ctx.translate(+this.camera_x, 0);
+    this.addObjectsToMap(this.level.gameInterface);
 
     let self = this;
     requestAnimationFrame(function () {
@@ -94,8 +98,7 @@ class World {
         if (character.isColliding(enemy)) {
           character.isHit();
 
-          console.log("DEAD", character.HP);
-          character.isDead();
+          console.log("HP =", character.HP);
         }
       });
       this.level.mapElements.forEach((element) => {
@@ -104,6 +107,27 @@ class World {
           console.log("DEAD", character.HP);
         }
       });
+
+      this.level.enemies.forEach((enemy) => {
+        this.playerShots.forEach((shot, index) => {
+          if (shot.projectileOutOfMap()) {
+            this.deleteShot(index);
+          }
+
+          if (shot.isColliding(enemy)) {
+            console.log("HIT");
+            enemy.isHit();
+            shot.speed = 0;
+            this.deleteShot(index);
+
+            console.log(enemy.HP);
+          }
+        });
+      });
     }, 100);
+  }
+
+  deleteShot(index) {
+    this.playerShots.splice(index, 1);
   }
 }

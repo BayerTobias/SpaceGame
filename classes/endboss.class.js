@@ -2,6 +2,7 @@ class EndBoss extends MovableObject {
   x = 300;
   height = 300;
   width = 300;
+  HP = 150;
 
   otherDirection = true;
 

@@ -9,6 +9,9 @@ class MovableObject extends DrawableObject {
 
   HP = 100;
   shield = 0;
+  lastShot = new Date().getTime();
+  cooldown = 350;
+
   lastHit;
 
   constructor() {
@@ -28,6 +31,9 @@ class MovableObject extends DrawableObject {
     if (keyboard.down) {
       this.moveDown();
     }
+    if (keyboard.space) {
+      this.shoot();
+    }
   }
 
   moveRight() {
@@ -46,6 +52,19 @@ class MovableObject extends DrawableObject {
     this.y += this.speed;
   }
 
+  shoot() {
+    if (this.shotCooldown()) {
+      this.world.playerShots.push(new Projectile(this));
+      this.lastShot = new Date().getTime();
+    }
+  }
+
+  shotCooldown() {
+    const timePassed = new Date().getTime() - this.lastShot;
+
+    return timePassed > this.cooldown;
+  }
+
   movementKeyIsPressed() {
     if (
       (this.world && this.world.keyboard.right) ||
@@ -53,6 +72,12 @@ class MovableObject extends DrawableObject {
       keyboard.down ||
       keyboard.left
     ) {
+      return true;
+    }
+  }
+
+  shootKeyIsPressed() {
+    if (keyboard.space) {
       return true;
     }
   }
@@ -71,8 +96,7 @@ class MovableObject extends DrawableObject {
       this.x + this.offsetX <= object.x + object.width - object.offsetX &&
       this.y + this.height - this.offsetY >= object.y + object.offsetY &&
       this.y + this.offsetY <= object.y + object.height - object.offsetY
-      //&& object.onCollisionCourse
-    ); // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    );
   }
 
   isDead() {
@@ -80,7 +104,7 @@ class MovableObject extends DrawableObject {
   }
 
   isHit() {
-    if (!this.isHurt()) {
+    if (!this.isHurt() || !(this instanceof Character)) {
       this.HP -= 10;
       if (this.HP < 0) {
         this.HP = 0;
