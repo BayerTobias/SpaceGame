@@ -42,7 +42,7 @@ class Character extends MovableObject {
   animate() {
     setInterval(() => {
       if (this.isDead()) {
-        this.animateImages(this.deathAnimation);
+        this.animateImagesOnce(this.deathAnimation);
       } else if (this.isHurt()) {
         this.animateImages(this.damageAnimation);
       } else {
@@ -53,6 +53,7 @@ class Character extends MovableObject {
         this.flyingSound.play();
       } else if (this.shootKeyIsPressed()) {
         this.handleCharacterMovement();
+        this.flyingSound.pause();
       } else {
         this.flyingSound.pause();
       }

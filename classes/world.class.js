@@ -25,7 +25,6 @@ class World {
     this.addToMap(this.level.background);
     this.addObjectsToMap(this.level.mapElements);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.enemiesExhaust);
     this.addToMap(this.level.character);
     this.addToMap(this.level.playeExhaust);
     this.addObjectsToMap(this.playerShots);
@@ -42,9 +41,6 @@ class World {
     this.level.character.world = this;
     this.level.playeExhaust.world = this;
     this.level.background.world = this;
-    this.level.enemiesExhaust.forEach((element) => {
-      element.world = this;
-    });
     this.level.gameInterface.forEach((element) => {
       element.world = this;
     });
@@ -55,9 +51,8 @@ class World {
       this.flipImage(object);
     }
     object.draw(this.ctx);
-
-    object.drawImgBorder(this.ctx); //delete b4 game finished
-    object.drawHitBox(this.ctx); //delete b4 game finished
+    // object.drawImgBorder(this.ctx); //delete b4 game finished
+    // object.drawHitBox(this.ctx); //delete b4 game finished
 
     if (object.otherDirection) {
       this.flipImageBack(object);
@@ -79,6 +74,9 @@ class World {
   addObjectsToMap(objects) {
     objects.forEach((object) => {
       this.addToMap(object);
+      if (object.checkIfEnemyShip()) {
+        this.addToMap(object.exhaust);
+      }
     });
   }
 
@@ -108,17 +106,22 @@ class World {
         }
       });
 
-      this.level.enemies.forEach((enemy) => {
-        this.playerShots.forEach((shot, index) => {
+      this.level.enemies.forEach((enemy, enemyIndex) => {
+        this.playerShots.forEach((shot, shotIndex) => {
           if (shot.projectileOutOfMap()) {
-            this.deleteShot(index);
+            this.deleteShot(shotIndex);
           }
 
-          if (shot.isColliding(enemy)) {
-            console.log("HIT");
+          if (shot.isColliding(enemy) && !enemy.isDead()) {
             enemy.isHit();
+            if (enemy.isDead()) {
+              setTimeout(() => {
+                this.deleteEnemy(enemyIndex);
+              }, 200);
+            }
             shot.speed = 0;
-            this.deleteShot(index);
+            shot.hasCollided = true;
+            this.deleteShot(shotIndex);
 
             console.log(enemy.HP);
           }
@@ -129,5 +132,9 @@ class World {
 
   deleteShot(index) {
     this.playerShots.splice(index, 1);
+  }
+
+  deleteEnemy(index) {
+    this.level.enemies.splice(index, 1);
   }
 }

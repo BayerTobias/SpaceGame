@@ -1,14 +1,22 @@
 class Projectile extends MovableObject {
-  projectileImages = ["../el-pollo-loco/img/projectiles/player/fire_asset.png"];
+  projectileExpireImages = [
+    "../el-pollo-loco/img/projectiles/player/fire_exp1.png",
+    "../el-pollo-loco/img/projectiles/player/fire_exp2.png",
+    "../el-pollo-loco/img/projectiles/player/fire_exp3.png",
+    "../el-pollo-loco/img/projectiles/player/fire_exp4.png",
+    "../el-pollo-loco/img/projectiles/player/fire_exp5.png",
+  ];
   speed = 10;
   width = 64;
   height = 64;
   offsetY = 25;
   shotFromX;
+  hasCollided = false;
 
   constructor(object) {
     super();
-    this.loadImage(this.projectileImages[0]);
+    this.loadImage("../el-pollo-loco/img/projectiles/player/fire_asset.png");
+    this.loadImages(this.projectileExpireImages);
 
     this.x = object.x + object.width - 10;
     this.y = object.y + object.offsetY;
@@ -16,6 +24,9 @@ class Projectile extends MovableObject {
 
     setInterval(() => {
       this.moveRight();
+      if (this.hasCollided) {
+        this.animateImages(this.projectileExpireImages);
+      }
     }, 1000 / 60);
   }
 

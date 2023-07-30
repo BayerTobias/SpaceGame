@@ -89,6 +89,15 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  animateImagesOnce(images) {
+    let i = this.currentImage % images.length;
+    if (this.currentImage < images.length) {
+      let path = images[i];
+      this.img = this.imgCache[path];
+      this.currentImage++;
+    }
+  }
+
   // Bessere Formel zur Kollisionsberechnung (Genauer)
   isColliding(object) {
     return (

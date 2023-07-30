@@ -65,4 +65,8 @@ class DrawableObject {
       ctx.stroke();
     }
   }
+
+  checkIfEnemyShip() {
+    return this instanceof EnemyShip;
+  }
 }
