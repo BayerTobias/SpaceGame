@@ -35,7 +35,12 @@ class EnemyShip extends MovableObject {
       this.exhaust.y = this.y + 25;
       if (this.isDead()) {
         this.animateImagesOnce(this.deathAnimation);
+        clearInterval(this.enemyShootingInterval);
       }
     }, 1000 / this.fps);
   }
+
+  enemyShootingInterval = setInterval(() => {
+    this.enemyShoot();
+  }, 1000 + Math.random() * 2000);
 }

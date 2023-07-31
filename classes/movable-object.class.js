@@ -3,6 +3,7 @@ class MovableObject extends DrawableObject {
   offsetY = 0;
 
   currentImage = 0;
+  deathAnmimationCurrentImage = 0;
   speed = 0.5 + Math.random() * 0.5;
   fps = 60;
   otherDirection = false;
@@ -54,9 +55,13 @@ class MovableObject extends DrawableObject {
 
   shoot() {
     if (this.shotCooldown()) {
-      this.world.playerShots.push(new Projectile(this));
+      this.world.playerShots.push(new PlayerProjectile(this));
       this.lastShot = new Date().getTime();
     }
+  }
+
+  enemyShoot() {
+    this.world.enemyShots.push(new EnemyProjectile(this));
   }
 
   shotCooldown() {
@@ -90,11 +95,11 @@ class MovableObject extends DrawableObject {
   }
 
   animateImagesOnce(images) {
-    let i = this.currentImage % images.length;
-    if (this.currentImage < images.length) {
+    let i = this.deathAnmimationCurrentImage % images.length;
+    if (this.deathAnmimationCurrentImage < images.length) {
       let path = images[i];
       this.img = this.imgCache[path];
-      this.currentImage++;
+      this.deathAnmimationCurrentImage++;
     }
   }
 
@@ -130,6 +135,6 @@ class MovableObject extends DrawableObject {
   isHurt() {
     const timePassed = new Date().getTime() - this.lastHit;
 
-    return timePassed < 800;
+    return timePassed < 500;
   }
 }

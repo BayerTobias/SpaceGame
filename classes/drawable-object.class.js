@@ -51,7 +51,8 @@ class DrawableObject {
       this instanceof Character ||
       this instanceof EndBoss ||
       this instanceof MapElement ||
-      this instanceof Projectile
+      this instanceof PlayerProjectile ||
+      this instanceof EnemyProjectile
     ) {
       ctx.beginPath();
       ctx.lineWidth = "2";

@@ -1,4 +1,4 @@
-class Projectile extends MovableObject {
+class PlayerProjectile extends MovableObject {
   projectileExpireImages = [
     "../el-pollo-loco/img/projectiles/player/fire_exp1.png",
     "../el-pollo-loco/img/projectiles/player/fire_exp2.png",
@@ -21,7 +21,10 @@ class Projectile extends MovableObject {
     this.x = object.x + object.width - 10;
     this.y = object.y + object.offsetY;
     this.shotFromX = object.x;
+    this.animate();
+  }
 
+  animate() {
     setInterval(() => {
       this.moveRight();
       if (this.hasCollided) {

@@ -2,7 +2,7 @@ class EndBoss extends MovableObject {
   x = 300;
   height = 300;
   width = 300;
-  HP = 30;
+  HP = 20;
   otherDirection = true;
 
   damageAnimation = [
@@ -43,6 +43,7 @@ class EndBoss extends MovableObject {
   animate() {
     setInterval(() => {
       if (this.isDead()) {
+        this.currentImage = 0;
         this.animateImagesOnce(this.deathAnimation);
         console.log("dead");
       } else if (this.isHurt()) {

@@ -28,6 +28,7 @@ class World {
     this.addToMap(this.level.character);
     this.addToMap(this.level.playeExhaust);
     this.addObjectsToMap(this.playerShots);
+    this.addObjectsToMap(this.enemyShots);
     this.ctx.translate(+this.camera_x, 0);
     this.addObjectsToMap(this.level.gameInterface);
 
@@ -44,6 +45,9 @@ class World {
     this.level.gameInterface.forEach((element) => {
       element.world = this;
     });
+    this.level.enemies.forEach((element) => {
+      element.world = this;
+    });
   }
 
   addToMap(object) {
@@ -51,8 +55,8 @@ class World {
       this.flipImage(object);
     }
     object.draw(this.ctx);
-    // object.drawImgBorder(this.ctx); //delete b4 game finished
-    // object.drawHitBox(this.ctx); //delete b4 game finished
+    object.drawImgBorder(this.ctx); //delete b4 game finished
+    object.drawHitBox(this.ctx); //delete b4 game finished
 
     if (object.otherDirection) {
       this.flipImageBack(object);
@@ -95,14 +99,11 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (character.isColliding(enemy)) {
           character.isHit();
-
-          console.log("HP =", character.HP);
         }
       });
       this.level.mapElements.forEach((element) => {
         if (character.isColliding(element)) {
           character.kill();
-          console.log("DEAD", character.HP);
         }
       });
 
@@ -121,17 +122,29 @@ class World {
             }
             shot.speed = 0;
             shot.hasCollided = true;
-            this.deleteShot(shotIndex);
 
-            console.log(enemy.HP);
+            this.deleteShot(shotIndex);
           }
         });
+      });
+
+      this.enemyShots.forEach((enemyShot, index) => {
+        if (enemyShot.isColliding(character)) {
+          character.isHit();
+          this.deleteEnemyShot(index);
+
+          console.log(character.HP);
+        }
       });
     }, 100);
   }
 
   deleteShot(index) {
     this.playerShots.splice(index, 1);
+  }
+
+  deleteEnemyShot(index) {
+    this.enemyShots.splice(index, 1);
   }
 
   deleteEnemy(index) {
