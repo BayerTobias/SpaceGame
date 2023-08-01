@@ -1,11 +1,18 @@
 class EnemyProjectile extends MovableObject {
-  projectileExpireImages = [];
   speed = 5;
   width = 64;
   height = 64;
   offsetY = 25;
   shotFromX;
   hasCollided = false;
+  otherDirection = true;
+
+  projectileExpireImages = [
+    "../el-pollo-loco/img/projectiles/enemys/shot3_exp1.png",
+    "../el-pollo-loco/img/projectiles/enemys/shot3_exp2.png",
+    "../el-pollo-loco/img/projectiles/enemys/shot3_exp3.png",
+    "../el-pollo-loco/img/projectiles/enemys/shot3_exp4.png",
+  ];
 
   constructor(object) {
     super();

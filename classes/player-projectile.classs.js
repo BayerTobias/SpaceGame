@@ -32,8 +32,4 @@ class PlayerProjectile extends MovableObject {
       }
     }, 1000 / 60);
   }
-
-  projectileOutOfMap() {
-    return this.x > this.shotFromX + 720;
-  }
 }

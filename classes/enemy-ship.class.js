@@ -1,5 +1,5 @@
 class EnemyShip extends MovableObject {
-  x = 200 + Math.random() * 500;
+  x = 700 + Math.random() * 500;
   y = 50 + Math.random() * 250;
   HP = 40;
   exhaust = new enemyExhaust();
@@ -41,6 +41,8 @@ class EnemyShip extends MovableObject {
   }
 
   enemyShootingInterval = setInterval(() => {
-    this.enemyShoot();
+    if (this.isVisableOnCanvas()) {
+      this.enemyShoot();
+    }
   }, 1000 + Math.random() * 2000);
 }

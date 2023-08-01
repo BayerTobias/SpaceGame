@@ -1,9 +1,13 @@
 class EndBoss extends MovableObject {
-  x = 300;
+  x = 500;
+  y = 100;
   height = 300;
   width = 300;
   HP = 20;
   otherDirection = true;
+
+  hitTop = true;
+  hitBottom;
 
   damageAnimation = [
     "../el-pollo-loco/img/endboss/endboss-damage/Boss1_lvl7_damage_000.png",
@@ -38,6 +42,7 @@ class EndBoss extends MovableObject {
     this.loadImages(this.damageAnimation);
     this.loadImages(this.deathAnimation);
     this.animate();
+    this.startFight();
   }
 
   animate() {
@@ -45,12 +50,30 @@ class EndBoss extends MovableObject {
       if (this.isDead()) {
         this.currentImage = 0;
         this.animateImagesOnce(this.deathAnimation);
-        console.log("dead");
       } else if (this.isHurt()) {
         this.animateImages(this.damageAnimation);
         console.log("is Hit");
       } else {
         this.loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
+      }
+    }, 1000 / this.fps);
+  }
+
+  startFight() {
+    setInterval(() => {
+      console.log(this.y);
+      if (this.hitTop) {
+        this.y++;
+        if (this.y + this.height === 490) {
+          this.hitBottom = true;
+          this.hitTop = false;
+        }
+      } else if (this.hitBottom) {
+        this.y--;
+        if (this.y === -10) {
+          this.hitBottom = false;
+          this.hitTop = true;
+        }
       }
     }, 1000 / this.fps);
   }

@@ -1,6 +1,6 @@
 class playerExhaust extends MovableObject {
-  x = 33;
-  y = 175;
+  x = 83;
+  y = 225;
   height = 50;
   width = 50;
   imagesExhaustAnimation = [

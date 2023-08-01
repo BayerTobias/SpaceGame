@@ -1,6 +1,6 @@
 class DrawableObject {
-  x = 50;
-  y = 150;
+  x = 100;
+  y = 200;
   height = 100;
   width = 100;
   img;
@@ -52,7 +52,9 @@ class DrawableObject {
       this instanceof EndBoss ||
       this instanceof MapElement ||
       this instanceof PlayerProjectile ||
-      this instanceof EnemyProjectile
+      this instanceof EnemyProjectile ||
+      this instanceof Rocket ||
+      this instanceof EndBossProjectile
     ) {
       ctx.beginPath();
       ctx.lineWidth = "2";

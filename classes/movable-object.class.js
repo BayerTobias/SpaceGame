@@ -64,6 +64,10 @@ class MovableObject extends DrawableObject {
     this.world.enemyShots.push(new EnemyProjectile(this));
   }
 
+  endBossShoot() {
+    this.world.enemyShots.push(new EndBossProjectile());
+  }
+
   shotCooldown() {
     const timePassed = new Date().getTime() - this.lastShot;
 
@@ -136,5 +140,21 @@ class MovableObject extends DrawableObject {
     const timePassed = new Date().getTime() - this.lastHit;
 
     return timePassed < 500;
+  }
+
+  projectileOutOfMap() {
+    if (this instanceof PlayerProjectile) {
+      return this.x > this.shotFromX + 720;
+    }
+    if (this instanceof EnemyProjectile) {
+      return this.x < this.shotFromX - 720;
+    }
+  }
+
+  isVisableOnCanvas() {
+    return (
+      this.x + this.offsetX > this.world.camera_x &&
+      this.x + this.width - this.offsetX < this.world.camera_x + 720
+    );
   }
 }

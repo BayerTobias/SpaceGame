@@ -1,6 +1,8 @@
 class World {
   level = level1;
 
+  traps = [new RocketSilo()];
+
   playerShots = [];
   enemyShots = [];
 
@@ -25,6 +27,7 @@ class World {
     this.addToMap(this.level.background);
     this.addObjectsToMap(this.level.mapElements);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.traps);
     this.addToMap(this.level.character);
     this.addToMap(this.level.playeExhaust);
     this.addObjectsToMap(this.playerShots);
@@ -46,6 +49,9 @@ class World {
       element.world = this;
     });
     this.level.enemies.forEach((element) => {
+      element.world = this;
+    });
+    this.traps.forEach((element) => {
       element.world = this;
     });
   }
@@ -129,6 +135,9 @@ class World {
       });
 
       this.enemyShots.forEach((enemyShot, index) => {
+        if (enemyShot.projectileOutOfMap()) {
+          this.deleteEnemyShot(index);
+        }
         if (enemyShot.isColliding(character)) {
           character.isHit();
           this.deleteEnemyShot(index);
