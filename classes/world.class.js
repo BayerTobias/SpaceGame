@@ -11,6 +11,8 @@ class World {
   keyboard;
   camera_x = 0;
 
+  globalIntervals = [];
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -18,7 +20,9 @@ class World {
     this.draw();
     this.setWorld();
     this.checkCollisions();
-    // this.startSidescroll();
+
+    // this.setGlobalInterval(() => this.startSidescroll(), 1000 / 60);
+    this.setGlobalInterval(() => this.checkCollisions(), 1000 / 60);
   }
 
   draw() {
@@ -92,60 +96,62 @@ class World {
 
   //this.level.levelEnd_X
   startSidescroll() {
-    setInterval(() => {
-      if (this.camera_x < 1060) {
-        this.camera_x += 1;
-      }
-    }, 1000 / 60);
+    if (this.camera_x < 1060) {
+      this.camera_x += 1;
+    }
   }
 
   checkCollisions() {
     let character = this.level.character;
-    setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (character.isColliding(enemy)) {
-          character.isHit();
-        }
-      });
-      this.level.mapElements.forEach((element) => {
-        if (character.isColliding(element)) {
-          character.kill();
-        }
-      });
 
-      this.level.enemies.forEach((enemy, enemyIndex) => {
-        this.playerShots.forEach((shot, shotIndex) => {
-          if (shot.projectileOutOfMap()) {
-            this.deleteShot(shotIndex);
+    this.level.enemies.forEach((enemy) => {
+      if (character.isColliding(enemy)) {
+        character.isHit();
+      }
+    });
+    this.level.mapElements.forEach((element) => {
+      if (character.isColliding(element)) {
+        character.kill();
+      }
+    });
+
+    this.level.enemies.forEach((enemy, enemyIndex) => {
+      this.playerShots.forEach((shot, shotIndex) => {
+        if (shot.projectileOutOfMap()) {
+          this.deleteShot(shotIndex);
+        }
+
+        if (shot.isColliding(enemy) && !enemy.isDead()) {
+          enemy.isHit();
+          if (enemy.isDead()) {
+            setTimeout(() => {
+              this.deleteEnemy(enemyIndex);
+            }, 200);
           }
+          shot.speed = 0;
+          shot.hasCollided = true;
+          // if(shot.hasCollided){
+          //   this.deleteShot(shotIndex)
+          // }
 
-          if (shot.isColliding(enemy) && !enemy.isDead()) {
-            enemy.isHit();
-            if (enemy.isDead()) {
-              setTimeout(() => {
-                this.deleteEnemy(enemyIndex);
-              }, 200);
-            }
-            shot.speed = 0;
-            shot.hasCollided = true;
-
-            this.deleteShot(shotIndex);
-          }
-        });
-      });
-
-      this.enemyShots.forEach((enemyShot, index) => {
-        if (enemyShot.projectileOutOfMap()) {
-          this.deleteEnemyShot(index);
-        }
-        if (enemyShot.isColliding(character)) {
-          character.isHit();
-          this.deleteEnemyShot(index);
-
-          console.log(character.HP);
+          this.deleteShot(shotIndex);
         }
       });
-    }, 100);
+    });
+
+    this.enemyShots.forEach((enemyShot, index) => {
+      if (enemyShot.projectileOutOfMap()) {
+        this.deleteEnemyShot(index);
+      }
+      if (enemyShot.isColliding(character)) {
+        character.isHit();
+        this.deleteEnemyShot(index);
+      }
+      if (enemyShot.hasCollided) {
+        // enemyShot.stopLocalIntervals();
+        this.deleteEnemyShot(index);
+      }
+    });
   }
 
   deleteShot(index) {
@@ -158,5 +164,14 @@ class World {
 
   deleteEnemy(index) {
     this.level.enemies.splice(index, 1);
+  }
+
+  setGlobalInterval(callback, time) {
+    let id = setInterval(callback, time);
+    this.globalIntervals.push(id);
+  }
+
+  stopGame() {
+    this.globalIntervals.forEach(clearInterval);
   }
 }

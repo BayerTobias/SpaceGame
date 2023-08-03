@@ -32,13 +32,11 @@ class Rocket extends MovableObject {
     );
     this.loadImages(this.flyingAnimationImages);
     this.loadImages(this.explosionAnimationImages);
-    this.animate();
+    this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
 
   animate() {
-    setInterval(() => {
-      this.animateImages(this.flyingAnimationImages);
-      this.moveUp();
-    }, 1000 / this.fps);
+    this.animateImages(this.flyingAnimationImages);
+    this.moveUp();
   }
 }

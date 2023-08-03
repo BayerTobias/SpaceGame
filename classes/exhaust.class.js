@@ -17,18 +17,16 @@ class playerExhaust extends MovableObject {
       "../el-pollo-loco/img/player-ship/engineAnimation4x/ship1_flight_lvl7_001.png"
     );
     this.loadImages(this.imagesExhaustAnimation);
-    this.animate();
+    this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
 
   animate() {
-    setInterval(() => {
-      if (this.movementKeyIsPressed()) {
-        this.handleExhaustMovement();
-        this.animateImages(this.imagesExhaustAnimation);
-      } else {
-        this.loadImage("");
-      }
-    }, 1000 / this.fps);
+    if (this.movementKeyIsPressed()) {
+      this.handleExhaustMovement();
+      this.animateImages(this.imagesExhaustAnimation);
+    } else {
+      this.loadImage("");
+    }
   }
 
   handleExhaustMovement() {

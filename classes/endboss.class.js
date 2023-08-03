@@ -3,7 +3,7 @@ class EndBoss extends MovableObject {
   y = 100;
   height = 300;
   width = 300;
-  HP = 20;
+  HP = 30;
   otherDirection = true;
 
   hitTop = true;
@@ -41,40 +41,47 @@ class EndBoss extends MovableObject {
     this.offsetY = 90;
     this.loadImages(this.damageAnimation);
     this.loadImages(this.deathAnimation);
-    this.animate();
-    this.startFight();
+
+    this.setLocalInterval(() => this.initiateClass(), 100);
+  }
+
+  initiateClass() {
+    if (this.world) {
+      this.setGlobalInterval(() => this.animate(), 1000 / this.fps);
+      this.setGlobalInterval(() => this.startFight(), 1000 / this.fps);
+      this.setGlobalInterval(() => this.endBossShoot(this.x, this.y), 1000);
+      this.stopLocalIntervals();
+    }
   }
 
   animate() {
-    setInterval(() => {
-      if (this.isDead()) {
-        this.currentImage = 0;
-        this.animateImagesOnce(this.deathAnimation);
-      } else if (this.isHurt()) {
-        this.animateImages(this.damageAnimation);
-        console.log("is Hit");
-      } else {
-        this.loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
-      }
-    }, 1000 / this.fps);
+    if (this.isDead()) {
+      this.currentImage = 0;
+      this.animateImagesOnce(this.deathAnimation);
+      setTimeout(() => {
+        // this.world.stopGame();
+      }, 200); // besser machen
+    } else if (this.isHurt()) {
+      this.animateImages(this.damageAnimation);
+      console.log("is Hit");
+    } else {
+      this.loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
+    }
   }
 
   startFight() {
-    setInterval(() => {
-      console.log(this.y);
-      if (this.hitTop) {
-        this.y++;
-        if (this.y + this.height === 490) {
-          this.hitBottom = true;
-          this.hitTop = false;
-        }
-      } else if (this.hitBottom) {
-        this.y--;
-        if (this.y === -10) {
-          this.hitBottom = false;
-          this.hitTop = true;
-        }
+    if (this.hitTop) {
+      this.y++;
+      if (this.y + this.height === 490) {
+        this.hitBottom = true;
+        this.hitTop = false;
       }
-    }, 1000 / this.fps);
+    } else if (this.hitBottom) {
+      this.y--;
+      if (this.y === -10) {
+        this.hitBottom = false;
+        this.hitTop = true;
+      }
+    }
   }
 }

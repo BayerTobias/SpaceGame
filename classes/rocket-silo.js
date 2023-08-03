@@ -20,15 +20,15 @@ class RocketSilo extends MovableObject {
     super();
     this.loadImage("../el-pollo-loco/img/traps/rocket-trap/Gates.png");
     this.loadImages(this.openSiloAnimationImages);
+    this.setLocalInterval(() => this.animate(), 200);
   }
 
   animate() {
-    setInterval(() => {
-      this.animateImagesOnce(this.openSiloAnimationImages);
-    }, 200);
+    this.animateImagesOnce(this.openSiloAnimationImages);
   }
 
   fireRocket() {
+    this.deathAnmimationCurrentImage = 0;
     this.world.enemyShots.push(new Rocket());
   }
 }

@@ -36,33 +36,38 @@ class Character extends MovableObject {
     super().loadImage(this.shipIMG);
     this.loadImages(this.damageAnimation);
     this.loadImages(this.deathAnimation);
-    this.animate();
+    this.setLocalInterval(() => this.initiateClass(), 1000 / this.fps);
+  }
+
+  initiateClass() {
+    if (this.world) {
+      this.setGlobalInterval(() => this.animate(), 1000 / this.fps);
+      this.stopLocalIntervals();
+    }
   }
 
   animate() {
-    setInterval(() => {
-      if (this.world) {
-        if (this.isDead()) {
-          this.animateImagesOnce(this.deathAnimation);
-        } else if (this.isHurt()) {
-          this.animateImages(this.damageAnimation);
-        } else {
-          this.loadImage(this.shipIMG);
-        }
-        if (!this.isVisableOnCanvas()) {
-          this.kill();
-          console.log("BOOM");
-        }
-        if (this.movementKeyIsPressed()) {
-          this.handleCharacterMovement();
-          this.flyingSound.play();
-        } else if (this.shootKeyIsPressed()) {
-          this.handleCharacterMovement();
-          this.flyingSound.pause();
-        } else {
-          this.flyingSound.pause();
-        }
+    if (this.world) {
+      if (this.isDead()) {
+        this.animateImagesOnce(this.deathAnimation);
+      } else if (this.isHurt()) {
+        this.animateImages(this.damageAnimation);
+      } else {
+        this.loadImage(this.shipIMG);
       }
-    }, 1000 / this.fps);
+      if (!this.isVisableOnCanvas()) {
+        this.kill();
+        console.log("BOOM");
+      }
+      if (this.movementKeyIsPressed()) {
+        this.handleCharacterMovement();
+        this.flyingSound.play();
+      } else if (this.shootKeyIsPressed()) {
+        this.handleCharacterMovement();
+        this.flyingSound.pause();
+      } else {
+        this.flyingSound.pause();
+      }
+    }
   }
 }

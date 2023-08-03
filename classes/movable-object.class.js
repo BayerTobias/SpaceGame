@@ -64,8 +64,8 @@ class MovableObject extends DrawableObject {
     this.world.enemyShots.push(new EnemyProjectile(this));
   }
 
-  endBossShoot() {
-    this.world.enemyShots.push(new EndBossProjectile());
+  endBossShoot(x, y) {
+    this.world.enemyShots.push(new EndBossProjectile(x, y));
   }
 
   shotCooldown() {

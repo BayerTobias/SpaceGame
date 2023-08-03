@@ -14,14 +14,13 @@ class ShieldBar extends StatusBar {
     super();
     this.loadImage("../el-pollo-loco/img/interface/defence0.png");
     this.loadImages(this.images);
-    this.checkPercent();
+
+    this.setLocalInterval(() => this.checkPercent(), 1000 / this.fps);
   }
 
   checkPercent() {
-    setInterval(() => {
-      if (this.world) {
-        this.setPercentage(this.world.level.character.shield);
-      }
-    }, 1000);
+    if (this.world) {
+      this.setPercentage(this.world.level.character.shield);
+    }
   }
 }

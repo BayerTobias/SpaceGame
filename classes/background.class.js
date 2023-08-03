@@ -7,14 +7,12 @@ class Background extends MovableObject {
 
   constructor() {
     super().loadImage("../el-pollo-loco/img/background/Space2.png");
-    this.animateSidescroll();
+    this.setLocalInterval(() => this.animateSidescroll(), 1000 / this.fps);
   }
 
   animateSidescroll() {
-    setInterval(() => {
-      if (this.world) {
-        this.x = this.world.camera_x;
-      }
-    }, 1000 / this.fps);
+    if (this.world) {
+      this.x = this.world.camera_x;
+    }
   }
 }

@@ -25,24 +25,33 @@ class EnemyShip extends MovableObject {
     this.offsetY = 30;
     this.offsetX = 15;
     this.loadImages(this.deathAnimation);
-    this.animate();
+    this.setLocalInterval(() => this.initiateClass(), 100);
+  }
+
+  initiateClass() {
+    if (this.world) {
+      this.setGlobalInterval(() => this.animate(), 1000 / this.fps);
+      this.setGlobalInterval(
+        () => this.fireShots(),
+        1000 + Math.random() * 2000
+      );
+      this.stopLocalIntervals();
+    }
   }
 
   animate() {
-    setInterval(() => {
-      this.moveLeft();
-      this.exhaust.x = this.x + 72;
-      this.exhaust.y = this.y + 25;
-      if (this.isDead()) {
-        this.animateImagesOnce(this.deathAnimation);
-        clearInterval(this.enemyShootingInterval);
-      }
-    }, 1000 / this.fps);
+    this.moveLeft();
+    this.exhaust.x = this.x + 72;
+    this.exhaust.y = this.y + 25;
+    if (this.isDead()) {
+      this.animateImagesOnce(this.deathAnimation);
+      this.stopLocalIntervals();
+    }
   }
 
-  enemyShootingInterval = setInterval(() => {
+  fireShots() {
     if (this.isVisableOnCanvas()) {
       this.enemyShoot();
     }
-  }, 1000 + Math.random() * 2000);
+  }
 }

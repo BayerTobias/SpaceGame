@@ -21,15 +21,14 @@ class PlayerProjectile extends MovableObject {
     this.x = object.x + object.width - 10;
     this.y = object.y + object.offsetY;
     this.shotFromX = object.x;
-    this.animate();
+    this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
 
   animate() {
-    setInterval(() => {
-      this.moveRight();
-      if (this.hasCollided) {
-        this.animateImages(this.projectileExpireImages);
-      }
-    }, 1000 / 60);
+    this.moveRight();
+    if (this.hasCollided) {
+      this.animateImages(this.projectileExpireImages);
+      this.stopLocalIntervals();
+    }
   }
 }

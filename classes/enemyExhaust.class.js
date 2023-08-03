@@ -13,14 +13,13 @@ class enemyExhaust extends MovableObject {
   otherDirection = true;
 
   constructor() {
-    super().loadImage("../el-pollo-loco/img/enemy-ships/Exhaust3/exhaust1.png");
+    super();
+    this.loadImage("../el-pollo-loco/img/enemy-ships/Exhaust3/exhaust1.png");
     this.loadImages(this.enemyImagesExhaustAnimation);
-    this.animate();
+    this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
 
   animate() {
-    setInterval(() => {
-      this.animateImages(this.enemyImagesExhaustAnimation);
-    }, 1000 / this.fps);
+    this.animateImages(this.enemyImagesExhaustAnimation);
   }
 }

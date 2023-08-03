@@ -7,6 +7,8 @@ class DrawableObject {
   imgCache = {};
   world;
 
+  localIntervals = [];
+
   constructor() {}
 
   loadImage(path) {
@@ -71,5 +73,19 @@ class DrawableObject {
 
   checkIfEnemyShip() {
     return this instanceof EnemyShip;
+  }
+
+  setLocalInterval(callback, time) {
+    let id = setInterval(callback, time);
+    this.localIntervals.push(id);
+  }
+
+  stopLocalIntervals() {
+    this.localIntervals.forEach(clearInterval);
+  }
+
+  setGlobalInterval(callback, time) {
+    let id = setInterval(callback, time);
+    this.world.globalIntervals.push(id);
   }
 }
