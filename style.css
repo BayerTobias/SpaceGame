@@ -1,9 +1,48 @@
+* {
+  padding: 0;
+}
+
 body {
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 canvas {
   background-color: black;
+  position: relative;
+}
+
+#container {
+  position: relative;
+}
+
+#overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#overlay > div {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+img {
+  cursor: pointer;
+}
+
+.d-none {
+  display: none !important;
 }

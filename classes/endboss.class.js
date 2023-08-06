@@ -1,10 +1,13 @@
 class EndBoss extends MovableObject {
-  x = 500;
+  x = 1500;
   y = 100;
   height = 300;
   width = 300;
-  HP = 30;
+  HP = 200;
   otherDirection = true;
+
+  invincible = true;
+  immuneTime = 300;
 
   hitTop = true;
   hitBottom;
@@ -46,7 +49,11 @@ class EndBoss extends MovableObject {
   }
 
   initiateClass() {
-    if (this.world) {
+    if (this.world && this.world.camera_x > 850) {
+      endBossIntroductionSound.play();
+    }
+    if (this.world && this.world.camera_x === world.level.levelEnd_X) {
+      this.invincible = false;
       this.setGlobalInterval(() => this.animate(), 1000 / this.fps);
       this.setGlobalInterval(() => this.startFight(), 1000 / this.fps);
       this.setGlobalInterval(() => this.endBossShoot(this.x, this.y), 1000);
@@ -58,9 +65,10 @@ class EndBoss extends MovableObject {
     if (this.isDead()) {
       this.currentImage = 0;
       this.animateImagesOnce(this.deathAnimation);
+      endBossDeathSound.play();
       setTimeout(() => {
-        // this.world.stopGame();
-      }, 200); // besser machen
+        this.world.stopGame();
+      }, 200);
     } else if (this.isHurt()) {
       this.animateImages(this.damageAnimation);
       console.log("is Hit");

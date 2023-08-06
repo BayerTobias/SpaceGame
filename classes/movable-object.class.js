@@ -4,12 +4,14 @@ class MovableObject extends DrawableObject {
 
   currentImage = 0;
   deathAnmimationCurrentImage = 0;
+  deathSoundPlayed;
   speed = 0.5 + Math.random() * 0.5;
   fps = 60;
   otherDirection = false;
 
   HP = 100;
   shield = 0;
+  invincible = false;
   lastShot = new Date().getTime();
   cooldown = 350;
 
@@ -56,16 +58,19 @@ class MovableObject extends DrawableObject {
   shoot() {
     if (this.shotCooldown()) {
       this.world.playerShots.push(new PlayerProjectile(this));
+      shootingSound.play();
       this.lastShot = new Date().getTime();
     }
   }
 
   enemyShoot() {
     this.world.enemyShots.push(new EnemyProjectile(this));
+    this.playEnemyShootingSound();
   }
 
   endBossShoot(x, y) {
     this.world.enemyShots.push(new EndBossProjectile(x, y));
+    this.playEnemyShootingSound();
   }
 
   shotCooldown() {
@@ -75,19 +80,22 @@ class MovableObject extends DrawableObject {
   }
 
   movementKeyIsPressed() {
-    if (
-      (this.world && this.world.keyboard.right) ||
-      keyboard.up ||
-      keyboard.down ||
-      keyboard.left
-    ) {
-      return true;
-    }
+    if (this.world && !this.world.level.character.isDead())
+      if (
+        this.world.keyboard.right ||
+        keyboard.up ||
+        keyboard.down ||
+        keyboard.left
+      ) {
+        return true;
+      }
   }
 
   shootKeyIsPressed() {
-    if (keyboard.space) {
-      return true;
+    if (this.world && !this.world.level.character.isDead()) {
+      if (keyboard.space) {
+        return true;
+      }
     }
   }
 
@@ -107,10 +115,9 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  // Bessere Formel zur Kollisionsberechnung (Genauer)
   isColliding(object) {
     return (
-      this.x + this.width + this.offsetX >= object.x + object.offsetX &&
+      this.x + this.width - this.offsetX >= object.x + object.offsetX &&
       this.x + this.offsetX <= object.x + object.width - object.offsetX &&
       this.y + this.height - this.offsetY >= object.y + object.offsetY &&
       this.y + this.offsetY <= object.y + object.height - object.offsetY
@@ -122,8 +129,10 @@ class MovableObject extends DrawableObject {
   }
 
   isHit() {
-    if (!this.isHurt() || !(this instanceof Character)) {
-      this.HP -= 10;
+    if (!this.isHurt()) {
+      if (this.shield > 0) {
+        this.shield -= 20;
+      } else this.HP -= 10;
       if (this.HP < 0) {
         this.HP = 0;
       } else {
@@ -132,14 +141,29 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  isInvincible() {
+    return this.invincible;
+  }
+
   kill() {
     this.HP = 0;
+    this.shield = 0;
   }
 
   isHurt() {
     const timePassed = new Date().getTime() - this.lastHit;
 
-    return timePassed < 500;
+    return timePassed < this.immuneTime;
+  }
+
+  isHealed(powerUpType) {
+    if (this.HP < 100 && powerUpType === "HP") {
+      this.HP += 10;
+      console.log(powerUpType);
+    }
+    if (this.shield < 100 && powerUpType === "shield") {
+      this.shield += 50;
+    }
   }
 
   projectileOutOfMap() {
@@ -149,6 +173,9 @@ class MovableObject extends DrawableObject {
     if (this instanceof EnemyProjectile) {
       return this.x < this.shotFromX - 720;
     }
+    if (this instanceof Rocket) {
+      return this.y + this.height < 0;
+    }
   }
 
   isVisableOnCanvas() {
@@ -156,5 +183,21 @@ class MovableObject extends DrawableObject {
       this.x + this.offsetX > this.world.camera_x &&
       this.x + this.width - this.offsetX < this.world.camera_x + 720
     );
+  }
+
+  playEnemyShootingSound() {
+    let clonedSound = enemyShootingSound.cloneNode();
+    clonedSound.volume = enemyShootingSound.volume;
+    clonedSound.play();
+  }
+
+  playExplosionSound() {
+    if (!this.deathSoundPlayed) {
+      let clonedSound = explosionSound.cloneNode();
+      clonedSound.volume = explosionSound.volume;
+      clonedSound.play();
+      this.deathSoundPlayed = true;
+      console.log("played", clonedSound);
+    }
   }
 }

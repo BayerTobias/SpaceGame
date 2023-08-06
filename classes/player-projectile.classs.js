@@ -12,6 +12,7 @@ class PlayerProjectile extends MovableObject {
   offsetY = 25;
   shotFromX;
   hasCollided = false;
+  animationFinished;
 
   constructor(object) {
     super();
@@ -27,8 +28,14 @@ class PlayerProjectile extends MovableObject {
   animate() {
     this.moveRight();
     if (this.hasCollided) {
-      this.animateImages(this.projectileExpireImages);
-      this.stopLocalIntervals();
+      this.animateImagesOnce(this.projectileExpireImages);
+      if (
+        this.deathAnmimationCurrentImage ===
+        this.projectileExpireImages.length - 1
+      ) {
+        this.animationFinished = true;
+        this.stopLocalIntervals();
+      }
     }
   }
 }

@@ -4,7 +4,8 @@ class Level {
   enemies;
   background;
   mapElements;
-  levelEnd_X; //endboss x koordinate
+  powerUps;
+  levelEnd_X = 1060;
   gameInterface;
 
   constructor(
@@ -13,6 +14,7 @@ class Level {
     enemies,
     background,
     mapElements,
+    powerUps,
     gameInterface
   ) {
     this.character = character;
@@ -20,6 +22,7 @@ class Level {
     this.enemies = enemies;
     this.background = background;
     this.mapElements = mapElements;
+    this.powerUps = powerUps;
     this.gameInterface = gameInterface;
   }
 }

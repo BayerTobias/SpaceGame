@@ -1,6 +1,8 @@
 class RocketSilo extends MovableObject {
   y = 360;
   x = 500;
+  cooldown = 2000;
+  characterHasEntered;
 
   openSiloAnimationImages = [
     "../el-pollo-loco/img/traps/rocket-trap/Gates.png",
@@ -20,15 +22,37 @@ class RocketSilo extends MovableObject {
     super();
     this.loadImage("../el-pollo-loco/img/traps/rocket-trap/Gates.png");
     this.loadImages(this.openSiloAnimationImages);
-    this.setLocalInterval(() => this.animate(), 200);
+    this.setLocalInterval(() => this.initiateClass(), 100);
+  }
+
+  initiateClass() {
+    if (this.world) {
+      this.setGlobalInterval(() => this.animate(), 200);
+      this.stopLocalIntervals();
+    }
   }
 
   animate() {
-    this.animateImagesOnce(this.openSiloAnimationImages);
+    if (this.inFiringZone(this.world.level.character) && this.shotCooldown()) {
+      this.fireRocket();
+      this.characterHasEntered = true;
+    }
+    if (this.characterHasEntered) {
+      this.animateImagesOnce(this.openSiloAnimationImages);
+    }
+  }
+
+  inFiringZone(character) {
+    return character.x < this.x && character.x > 150;
   }
 
   fireRocket() {
     this.deathAnmimationCurrentImage = 0;
-    this.world.enemyShots.push(new Rocket());
+
+    this.lastShot = new Date().getTime();
+
+    setTimeout(() => {
+      this.world.enemyShots.push(new Rocket());
+    }, 1000);
   }
 }

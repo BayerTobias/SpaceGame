@@ -1,8 +1,8 @@
 class Rocket extends MovableObject {
-  speed = 2;
+  speed = 8;
   offsetX = 40;
   offsetY = 25;
-  y = 360;
+  y = 370;
   x = 500;
 
   flyingAnimationImages = [
@@ -11,6 +11,7 @@ class Rocket extends MovableObject {
     "../el-pollo-loco/img/traps/rocket-trap/Rockett+Exhaust3.png",
     "../el-pollo-loco/img/traps/rocket-trap/Rockett+Exhaust4.png",
   ];
+
   explosionAnimationImages = [
     "../el-pollo-loco/img/traps/rocket-trap/Rockett+explosion1.png",
     "../el-pollo-loco/img/traps/rocket-trap/Rockett+explosion2.png",
@@ -36,7 +37,17 @@ class Rocket extends MovableObject {
   }
 
   animate() {
-    this.animateImages(this.flyingAnimationImages);
-    this.moveUp();
+    if (!this.hasCollided) {
+      this.animateImages(this.flyingAnimationImages);
+      this.moveUp();
+    } else {
+      this.animateImagesOnce(this.explosionAnimationImages);
+      if (
+        this.deathAnmimationCurrentImage ===
+        this.explosionAnimationImages.length - 1
+      ) {
+        this.animationFinished = true;
+      }
+    }
   }
 }

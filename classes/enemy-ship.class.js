@@ -1,10 +1,13 @@
 class EnemyShip extends MovableObject {
-  x = 700 + Math.random() * 500;
+  x;
   y = 50 + Math.random() * 250;
   HP = 40;
   exhaust = new enemyExhaust();
   ID;
   otherDirection = true;
+  deathSoundPlayed;
+
+  immuneTime = 100;
 
   deathAnimation = [
     "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_000.png",
@@ -20,10 +23,11 @@ class EnemyShip extends MovableObject {
     "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_021.png",
   ];
 
-  constructor() {
+  constructor(minX) {
     super().loadImage("../el-pollo-loco/img/enemy-ships/Ship3.png");
     this.offsetY = 30;
     this.offsetX = 15;
+    this.x = minX + Math.random() * 500;
     this.loadImages(this.deathAnimation);
     this.setLocalInterval(() => this.initiateClass(), 100);
   }
@@ -31,11 +35,11 @@ class EnemyShip extends MovableObject {
   initiateClass() {
     if (this.world) {
       this.setGlobalInterval(() => this.animate(), 1000 / this.fps);
-      this.setGlobalInterval(
+      this.stopLocalIntervals();
+      this.setLocalInterval(
         () => this.fireShots(),
         1000 + Math.random() * 2000
       );
-      this.stopLocalIntervals();
     }
   }
 
@@ -45,6 +49,7 @@ class EnemyShip extends MovableObject {
     this.exhaust.y = this.y + 25;
     if (this.isDead()) {
       this.animateImagesOnce(this.deathAnimation);
+      this.playExplosionSound();
       this.stopLocalIntervals();
     }
   }

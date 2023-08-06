@@ -17,7 +17,14 @@ class playerExhaust extends MovableObject {
       "../el-pollo-loco/img/player-ship/engineAnimation4x/ship1_flight_lvl7_001.png"
     );
     this.loadImages(this.imagesExhaustAnimation);
-    this.setLocalInterval(() => this.animate(), 1000 / this.fps);
+    this.setLocalInterval(() => this.initiateClass(), 100);
+  }
+
+  initiateClass() {
+    if (this.world) {
+      this.setGlobalInterval(() => this.animate(), 1000 / (2 * this.fps));
+      this.stopLocalIntervals();
+    }
   }
 
   animate() {

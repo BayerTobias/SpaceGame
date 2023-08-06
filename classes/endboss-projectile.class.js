@@ -4,9 +4,12 @@ class EndBossProjectile extends MovableObject {
   offsetY = 45;
 
   shotFromX;
-  detonateAfter = Math.random() * 450;
+  detonateAfter = 150 + Math.random() * 300;
   hasCollided = false;
+  animationStarted = false;
+  animationFinished = false;
   otherDirection = true;
+  explosionSoundPlayed;
 
   projectileImg = "../el-pollo-loco/img/projectiles/endboss/Shot1_asset.png";
 
@@ -37,20 +40,28 @@ class EndBossProjectile extends MovableObject {
 
   animate() {
     this.moveLeft();
-    if (this.timeToExplode()) {
+    if (this.timeToExplode() && !this.animationStarted) {
       this.setLocalInterval(() => this.detonateShot(), 1000 / this.fps);
+      this.animationStarted = true;
       this.speed = 0;
     }
   }
 
   detonateShot() {
+    this.playLaserExplosionSound();
     if (
       this.deathAnmimationCurrentImage < this.explosionAnimationImages.length
     ) {
       this.extendExplosion();
       this.animateImagesOnce(this.explosionAnimationImages);
-    } else {
-      this.hasCollided = true;
+    }
+    if (
+      this.deathAnmimationCurrentImage ===
+      this.explosionAnimationImages.length - 1
+    ) {
+      this.animationFinished = true;
+    }
+    if (this.animationFinished) {
       this.stopLocalIntervals();
     }
   }
@@ -62,5 +73,14 @@ class EndBossProjectile extends MovableObject {
   extendExplosion() {
     this.offsetX -= 4;
     this.offsetY -= 4;
+  }
+
+  playLaserExplosionSound() {
+    if (!this.explosionSoundPlayed) {
+      let clonedSound = endBossLaserExplosionSound.cloneNode();
+      clonedSound.volume = endBossLaserExplosionSound.volume;
+      clonedSound.play();
+      this.explosionSoundPlayed = true;
+    }
   }
 }

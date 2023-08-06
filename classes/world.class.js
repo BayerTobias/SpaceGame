@@ -17,12 +17,6 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.draw();
-    this.setWorld();
-    this.checkCollisions();
-
-    // this.setGlobalInterval(() => this.startSidescroll(), 1000 / 60);
-    this.setGlobalInterval(() => this.checkCollisions(), 1000 / 60);
   }
 
   draw() {
@@ -30,6 +24,7 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.level.background);
     this.addObjectsToMap(this.level.mapElements);
+    this.addObjectsToMap(this.level.powerUps);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.traps);
     this.addToMap(this.level.character);
@@ -65,8 +60,8 @@ class World {
       this.flipImage(object);
     }
     object.draw(this.ctx);
-    object.drawImgBorder(this.ctx); //delete b4 game finished
-    object.drawHitBox(this.ctx); //delete b4 game finished
+    // object.drawImgBorder(this.ctx); //delete b4 game finished
+    // object.drawHitBox(this.ctx); //delete b4 game finished
 
     if (object.otherDirection) {
       this.flipImageBack(object);
@@ -94,9 +89,8 @@ class World {
     });
   }
 
-  //this.level.levelEnd_X
   startSidescroll() {
-    if (this.camera_x < 1060) {
+    if (this.camera_x < this.level.levelEnd_X) {
       this.camera_x += 1;
     }
   }
@@ -104,54 +98,94 @@ class World {
   checkCollisions() {
     let character = this.level.character;
 
+    this.checkCharacterIsDead(character);
+    this.checkCharacterIsCollidingWithEnemy(character);
+    this.checkCharacterIsCollidingWithMap(character);
+    this.checkPlayerProjectileCollisions();
+    this.checkEnemyProjectileCollisions(character);
+    this.checkPowerUpCollision(character);
+  }
+
+  checkCharacterIsDead(character) {
+    if (character.isDead()) {
+      setTimeout(() => {
+        this.stopGame();
+      }, 200);
+    }
+  }
+
+  checkCharacterIsCollidingWithEnemy(character) {
     this.level.enemies.forEach((enemy) => {
       if (character.isColliding(enemy)) {
         character.isHit();
       }
     });
+  }
+
+  checkCharacterIsCollidingWithMap(character) {
     this.level.mapElements.forEach((element) => {
       if (character.isColliding(element)) {
         character.kill();
       }
     });
+  }
 
-    this.level.enemies.forEach((enemy, enemyIndex) => {
-      this.playerShots.forEach((shot, shotIndex) => {
-        if (shot.projectileOutOfMap()) {
-          this.deleteShot(shotIndex);
-        }
-
-        if (shot.isColliding(enemy) && !enemy.isDead()) {
-          enemy.isHit();
-          if (enemy.isDead()) {
-            setTimeout(() => {
-              this.deleteEnemy(enemyIndex);
-            }, 200);
-          }
-          shot.speed = 0;
-          shot.hasCollided = true;
-          // if(shot.hasCollided){
-          //   this.deleteShot(shotIndex)
-          // }
-
-          this.deleteShot(shotIndex);
-        }
-      });
-    });
-
+  checkEnemyProjectileCollisions(character) {
     this.enemyShots.forEach((enemyShot, index) => {
       if (enemyShot.projectileOutOfMap()) {
         this.deleteEnemyShot(index);
       }
       if (enemyShot.isColliding(character)) {
         character.isHit();
-        this.deleteEnemyShot(index);
+        enemyShot.hasCollided = true;
       }
-      if (enemyShot.hasCollided) {
-        // enemyShot.stopLocalIntervals();
+      if (enemyShot.animationFinished) {
         this.deleteEnemyShot(index);
       }
     });
+  }
+
+  checkPowerUpCollision(character) {
+    this.level.powerUps.forEach((powerUp, index) => {
+      if (powerUp.isColliding(character)) {
+        character.isHealed(powerUp.type);
+        this.deletePowerUp(index);
+      }
+    });
+  }
+
+  checkPlayerProjectileCollisions() {
+    this.level.enemies.forEach((enemy, enemyIndex) => {
+      this.playerShots.forEach((shot, shotIndex) => {
+        if (shot.projectileOutOfMap()) () => this.deleteShot(shotIndex);
+
+        if (this.enemyIsHit(shot, enemy)) {
+          enemy.isHit();
+          this.checkIfEnemyIsDead(enemy, enemyIndex);
+          shot.speed = 0;
+          shot.hasCollided = true;
+        }
+        this.checkAnimationIsFinished(shot, shotIndex);
+      });
+    });
+  }
+
+  checkIfEnemyIsDead(enemy, enemyIndex) {
+    if (enemy.isDead()) {
+      setTimeout(() => {
+        this.deleteEnemy(enemyIndex);
+      }, 200);
+    }
+  }
+
+  checkAnimationIsFinished(shot, shotIndex) {
+    if (shot.animationFinished) {
+      this.deleteShot(shotIndex);
+    }
+  }
+
+  enemyIsHit(shot, enemy) {
+    return shot.isColliding(enemy) && !enemy.isDead() && !enemy.isInvincible();
   }
 
   deleteShot(index) {
@@ -166,12 +200,38 @@ class World {
     this.level.enemies.splice(index, 1);
   }
 
+  deletePowerUp(index) {
+    this.level.powerUps.splice(index, 1);
+  }
+
   setGlobalInterval(callback, time) {
     let id = setInterval(callback, time);
     this.globalIntervals.push(id);
   }
 
+  startGame() {
+    initLevel();
+    this.level = level1;
+    this.draw();
+    this.setWorld();
+    this.checkCollisions();
+    document.getElementById("overlay").classList.add("d-none");
+
+    this.setGlobalInterval(() => this.startSidescroll(), 1000 / 60);
+    this.setGlobalInterval(() => this.checkCollisions(), 1000 / 60);
+    soundTrack.play();
+  }
+
   stopGame() {
     this.globalIntervals.forEach(clearInterval);
+    this.level.enemies.forEach((enemy) => {
+      enemy.stopLocalIntervals();
+      if (enemy.exhaust) {
+        enemy.exhaust.stopLocalIntervals();
+      }
+    });
+    this.enemyShots.forEach((shot) => shot.stopLocalIntervals());
+    this.playerShots.forEach((shot) => shot.stopLocalIntervals());
+    soundTrack.pause();
   }
 }

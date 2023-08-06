@@ -1,9 +1,12 @@
 class Character extends MovableObject {
   world;
-  offsetY = 25;
+  offsetY = 30;
+  offsetX = 10;
   speed = 4;
   shipIMG = "../el-pollo-loco/img/player-ship/ship_asset7.png";
-  flyingSound = new Audio("../el-pollo-loco/audio/rocket-trust.mp3");
+
+  immuneTime = 500;
+
   damageAnimation = [
     "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_000.png",
     "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_001.png",
@@ -50,6 +53,8 @@ class Character extends MovableObject {
     if (this.world) {
       if (this.isDead()) {
         this.animateImagesOnce(this.deathAnimation);
+        this.playExplosionSound();
+        this.muteAudio();
       } else if (this.isHurt()) {
         this.animateImages(this.damageAnimation);
       } else {
@@ -57,17 +62,20 @@ class Character extends MovableObject {
       }
       if (!this.isVisableOnCanvas()) {
         this.kill();
-        console.log("BOOM");
       }
       if (this.movementKeyIsPressed()) {
         this.handleCharacterMovement();
-        this.flyingSound.play();
+        flyingSound.play();
       } else if (this.shootKeyIsPressed()) {
         this.handleCharacterMovement();
-        this.flyingSound.pause();
+        flyingSound.pause();
       } else {
-        this.flyingSound.pause();
+        flyingSound.pause();
       }
     }
+  }
+
+  muteAudio() {
+    this.flyingSound.muted = true;
   }
 }
