@@ -10,6 +10,10 @@ body {
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  background-image: url("../el-pollo-loco/img/menue/Space3.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 canvas {
@@ -31,6 +35,10 @@ canvas {
   left: 0;
   right: 0;
   bottom: 0;
+  background-image: url("../el-pollo-loco/img/menue/Space6.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #overlay > div {
