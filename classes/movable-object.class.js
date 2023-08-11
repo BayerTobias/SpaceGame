@@ -81,12 +81,7 @@ class MovableObject extends DrawableObject {
 
   movementKeyIsPressed() {
     if (this.world && !this.world.level.character.isDead())
-      if (
-        this.world.keyboard.right ||
-        keyboard.up ||
-        keyboard.down ||
-        keyboard.left
-      ) {
+      if (this.world.keyboard.right || keyboard.up || keyboard.down || keyboard.left) {
         return true;
       }
   }
@@ -188,6 +183,7 @@ class MovableObject extends DrawableObject {
   playEnemyShootingSound() {
     let clonedSound = enemyShootingSound.cloneNode();
     clonedSound.volume = enemyShootingSound.volume;
+    clonedSound.muted = enemyShootingSound.muted;
     clonedSound.play();
   }
 
@@ -195,9 +191,9 @@ class MovableObject extends DrawableObject {
     if (!this.deathSoundPlayed) {
       let clonedSound = explosionSound.cloneNode();
       clonedSound.volume = explosionSound.volume;
+      clonedSound.muted = explosionSound.muted;
       clonedSound.play();
       this.deathSoundPlayed = true;
-      console.log("played", clonedSound);
     }
   }
 }

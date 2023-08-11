@@ -11,6 +11,7 @@
       type="image/x-icon"
     />
     <script src="../el-pollo-loco/js/audio.js"></script>
+    <script src="../el-pollo-loco/js/HTML-tamplates.js"></script>
     <script src="../el-pollo-loco/classes/world.class.js"></script>
     <script src="../el-pollo-loco/classes/drawable-object.class.js"></script>
     <script src="../el-pollo-loco/classes/interface-hud.class.js"></script>
@@ -38,10 +39,10 @@
     <script src="../el-pollo-loco/js/game.js"></script>
   </head>
   <body onload="init()">
-    <h1>Game Name</h1>
     <div id="container">
       <canvas id="canvas" width="720" height="480"></canvas>
       <div id="overlay">
+        <img src="../el-pollo-loco/img/menue/space-shooter.png" alt="" />
         <div>
           <span>Play</span>
           <img
@@ -49,6 +50,37 @@
             src="../el-pollo-loco/img/menue/play-button.png"
             alt="play-button"
           />
+        </div>
+      </div>
+      <div id="mobile-overlay">
+        <div id="mobile-directions-container">
+          <div class="direction-button" id="left"></div>
+          <div class="direction-button" id="right"></div>
+          <div class="direction-button" id="up"></div>
+          <div class="direction-button" id="down"></div>
+        </div>
+        <div id="mobile-shoot-container"><div id="space"></div></div>
+      </div>
+      <div class="d-none" id="game-over-overlay">
+        <img src="../el-pollo-loco/img/menue/victory.png" alt="victory img" />
+        <div>
+          <span>Play again</span>
+          <img
+            onclick="world.startGame()"
+            src="../el-pollo-loco/img/menue/play-button.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div id="options-overlay">
+        <div id="mute-all-sounds-button" onclick="toggleAllSounds()">
+          <img src="../el-pollo-loco/img/menue/volume-high-solid.svg" alt="" />
+        </div>
+        <div id="mute-background-sound-button" onclick="toggleSoundTrack()">
+          <img src="../el-pollo-loco/img/menue/music-solid.svg" alt="" />
+        </div>
+        <div id="full-screen-button" onclick="toggleFullscreen()">
+          <img src="../el-pollo-loco/img/menue/expand-solid.svg" alt="" />
         </div>
       </div>
     </div>

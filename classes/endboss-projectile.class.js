@@ -49,16 +49,11 @@ class EndBossProjectile extends MovableObject {
 
   detonateShot() {
     this.playLaserExplosionSound();
-    if (
-      this.deathAnmimationCurrentImage < this.explosionAnimationImages.length
-    ) {
+    if (this.deathAnmimationCurrentImage < this.explosionAnimationImages.length) {
       this.extendExplosion();
       this.animateImagesOnce(this.explosionAnimationImages);
     }
-    if (
-      this.deathAnmimationCurrentImage ===
-      this.explosionAnimationImages.length - 1
-    ) {
+    if (this.deathAnmimationCurrentImage === this.explosionAnimationImages.length - 1) {
       this.animationFinished = true;
     }
     if (this.animationFinished) {
@@ -79,6 +74,7 @@ class EndBossProjectile extends MovableObject {
     if (!this.explosionSoundPlayed) {
       let clonedSound = endBossLaserExplosionSound.cloneNode();
       clonedSound.volume = endBossLaserExplosionSound.volume;
+      clonedSound.muted = endBossLaserExplosionSound.muted;
       clonedSound.play();
       this.explosionSoundPlayed = true;
     }

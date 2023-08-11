@@ -54,7 +54,7 @@ class Character extends MovableObject {
       if (this.isDead()) {
         this.animateImagesOnce(this.deathAnimation);
         this.playExplosionSound();
-        this.muteAudio();
+        flyingSound.pause();
       } else if (this.isHurt()) {
         this.animateImages(this.damageAnimation);
       } else {
@@ -73,9 +73,5 @@ class Character extends MovableObject {
         flyingSound.pause();
       }
     }
-  }
-
-  muteAudio() {
-    this.flyingSound.muted = true;
   }
 }

@@ -71,7 +71,6 @@ class EndBoss extends MovableObject {
       }, 200);
     } else if (this.isHurt()) {
       this.animateImages(this.damageAnimation);
-      console.log("is Hit");
     } else {
       this.loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
     }

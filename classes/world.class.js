@@ -210,16 +210,24 @@ class World {
   }
 
   startGame() {
+    this.camera_x = 0;
+    this.resetWord();
     initLevel();
     this.level = level1;
     this.draw();
     this.setWorld();
     this.checkCollisions();
     document.getElementById("overlay").classList.add("d-none");
+    document.getElementById("game-over-overlay").classList.add("d-none");
 
     this.setGlobalInterval(() => this.startSidescroll(), 1000 / 60);
     this.setGlobalInterval(() => this.checkCollisions(), 1000 / 60);
     soundTrack.play();
+  }
+
+  resetWord() {
+    this.enemyShots = [];
+    this.playerShots = [];
   }
 
   stopGame() {
@@ -233,5 +241,6 @@ class World {
     this.enemyShots.forEach((shot) => shot.stopLocalIntervals());
     this.playerShots.forEach((shot) => shot.stopLocalIntervals());
     soundTrack.pause();
+    flyingSound.pause();
   }
 }
