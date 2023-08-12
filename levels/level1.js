@@ -87,6 +87,7 @@ function initLevel() {
       new InterfaceIcon(10, 405, 70, 70, 0),
       new InterfaceIcon(90, 415, 15, 15, 1),
       new InterfaceIcon(90, 435, 15, 15, 2),
-    ]
+    ],
+    [new RocketSilo()]
   );
 }

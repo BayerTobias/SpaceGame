@@ -7,6 +7,7 @@ class Level {
   powerUps;
   levelEnd_X = 1060;
   gameInterface;
+  traps;
 
   constructor(
     character,
@@ -15,7 +16,8 @@ class Level {
     background,
     mapElements,
     powerUps,
-    gameInterface
+    gameInterface,
+    traps
   ) {
     this.character = character;
     this.playeExhaust = playeExhaust;
@@ -24,5 +26,6 @@ class Level {
     this.mapElements = mapElements;
     this.powerUps = powerUps;
     this.gameInterface = gameInterface;
+    this.traps = traps;
   }
 }

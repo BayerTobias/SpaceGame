@@ -31,45 +31,22 @@ function handleMobileInputs() {
   const downButton = document.getElementById("down");
   const spaceButton = document.getElementById("space");
 
-  leftButton.addEventListener("touchstart", (e) => {
+  setEventListener(leftButton, "left");
+  setEventListener(rightButton, "right");
+  setEventListener(upButton, "up");
+  setEventListener(downButton, "down");
+  setEventListener(spaceButton, "space");
+}
+
+function setEventListener(button, direction) {
+  button.addEventListener("touchstart", (e) => {
     e.preventDefault();
-    handleMobileInput("left", true);
+    handleMobileInput(direction, true);
   });
-  leftButton.addEventListener("touchend", (e) => {
+
+  button.addEventListener("touchend", (e) => {
     e.preventDefault();
-    handleMobileInput("left", false);
-  });
-  rightButton.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    handleMobileInput("right", true);
-  });
-  rightButton.addEventListener("touchend", (e) => {
-    e.preventDefault();
-    handleMobileInput("right", false);
-  });
-  upButton.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    handleMobileInput("up", true);
-  });
-  upButton.addEventListener("touchend", (e) => {
-    e.preventDefault();
-    handleMobileInput("up", false);
-  });
-  downButton.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    handleMobileInput("down", true);
-  });
-  downButton.addEventListener("touchend", (e) => {
-    e.preventDefault();
-    handleMobileInput("down", false);
-  });
-  spaceButton.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    handleMobileInput("space", true);
-  });
-  spaceButton.addEventListener("touchend", (e) => {
-    e.preventDefault();
-    handleMobileInput("space", false);
+    handleMobileInput(direction, false);
   });
 }
 
@@ -85,10 +62,28 @@ function handleMobileInput(keyboardKey, status) {
 
 function toggleSoundTrack() {
   if (soundTrack.muted) {
-    soundTrack.muted = false;
+    ummuteSoundTrack();
   } else {
-    soundTrack.muted = true;
+    muteSoundTrack();
   }
+}
+
+function muteSoundTrack() {
+  const img = document
+    .getElementById("mute-background-sound-button")
+    .querySelector("img");
+
+  soundTrack.muted = true;
+  img.src = "../el-pollo-loco/img/menue/icons-bg-music-off.png";
+}
+
+function ummuteSoundTrack() {
+  const img = document
+    .getElementById("mute-background-sound-button")
+    .querySelector("img");
+
+  soundTrack.muted = false;
+  img.src = "../el-pollo-loco/img/menue/icons-bg-music-on.png";
 }
 
 function toggleAllSounds() {
@@ -104,13 +99,13 @@ function toggleAllSounds() {
 function muteAllSounds(img) {
   allSounds.forEach((sound) => (sound.muted = true));
   muted = true;
-  img.src = "../el-pollo-loco/img/menue/volume-xmark-solid.svg";
+  img.src = "../el-pollo-loco/img/menue/icons-sound-fx-off.png";
 }
 
 function unmuteAllSounds(img) {
   allSounds.forEach((sound) => (sound.muted = false));
   muted = false;
-  img.src = "../el-pollo-loco/img/menue/volume-high-solid.svg";
+  img.src = "../el-pollo-loco/img/menue/icons-sound-fx-on.png";
 }
 
 function toggleFullscreen() {
@@ -135,4 +130,29 @@ function exitFullscreen(canvas, img) {
   document.exitFullscreen();
   canvas.classList.remove("fullscreen");
   img.src = "../el-pollo-loco/img/menue/expand-solid.svg";
+}
+
+function showEndscreen(callback) {
+  let endScreen = document.getElementById("game-over-overlay");
+  endScreen.innerHTML = callback();
+  endScreen.classList.remove("d-none");
+  document.getElementById("mobile-overlay").classList.add("d-none");
+}
+
+function toggleControls() {
+  const controls = document.getElementById("controls");
+
+  controls.classList.toggle("d-none");
+}
+
+function toggleMobileOverlay() {
+  const mobileOverlay = document.getElementById("mobile-overlay");
+
+  if (!mobileOverlay.checkVisibility()) {
+    mobileOverlay.classList.remove("d-none");
+    mobileOverlay.style = "display: flex;";
+  } else {
+    mobileOverlay.classList.add("d-none");
+    mobileOverlay.style = "";
+  }
 }

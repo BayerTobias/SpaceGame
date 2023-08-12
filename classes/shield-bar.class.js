@@ -19,8 +19,6 @@ class ShieldBar extends StatusBar {
   }
 
   checkPercent() {
-    if (this.world) {
-      this.setPercentage(this.world.level.character.shield);
-    }
+    if (this.world) this.setPercentage(this.world.level.character.shield);
   }
 }

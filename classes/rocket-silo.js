@@ -37,9 +37,7 @@ class RocketSilo extends MovableObject {
       this.fireRocket();
       this.characterHasEntered = true;
     }
-    if (this.characterHasEntered) {
-      this.animateImagesOnce(this.openSiloAnimationImages);
-    }
+    if (this.characterHasEntered) this.animateImagesOnce(this.openSiloAnimationImages);
   }
 
   inFiringZone(character) {
@@ -48,7 +46,6 @@ class RocketSilo extends MovableObject {
 
   fireRocket() {
     this.deathAnmimationCurrentImage = 0;
-
     this.lastShot = new Date().getTime();
 
     setTimeout(() => {

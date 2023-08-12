@@ -1,8 +1,6 @@
 class World {
   level = level1;
 
-  traps = [new RocketSilo()];
-
   playerShots = [];
   enemyShots = [];
 
@@ -26,7 +24,7 @@ class World {
     this.addObjectsToMap(this.level.mapElements);
     this.addObjectsToMap(this.level.powerUps);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.traps);
+    this.addObjectsToMap(this.level.traps);
     this.addToMap(this.level.character);
     this.addToMap(this.level.playeExhaust);
     this.addObjectsToMap(this.playerShots);
@@ -50,22 +48,15 @@ class World {
     this.level.enemies.forEach((element) => {
       element.world = this;
     });
-    this.traps.forEach((element) => {
+    this.level.traps.forEach((element) => {
       element.world = this;
     });
   }
 
   addToMap(object) {
-    if (object.otherDirection) {
-      this.flipImage(object);
-    }
+    if (object.otherDirection) this.flipImage(object);
     object.draw(this.ctx);
-    // object.drawImgBorder(this.ctx); //delete b4 game finished
-    // object.drawHitBox(this.ctx); //delete b4 game finished
-
-    if (object.otherDirection) {
-      this.flipImageBack(object);
-    }
+    if (object.otherDirection) this.flipImageBack(object);
   }
 
   flipImage(object) {
@@ -110,6 +101,7 @@ class World {
     if (character.isDead()) {
       setTimeout(() => {
         this.stopGame();
+        showEndscreen(getDefeatHTML);
       }, 200);
     }
   }
@@ -132,17 +124,15 @@ class World {
 
   checkEnemyProjectileCollisions(character) {
     this.enemyShots.forEach((enemyShot, index) => {
-      if (enemyShot.projectileOutOfMap()) {
-        this.deleteEnemyShot(index);
-      }
-      if (enemyShot.isColliding(character)) {
-        character.isHit();
-        enemyShot.hasCollided = true;
-      }
-      if (enemyShot.animationFinished) {
-        this.deleteEnemyShot(index);
-      }
+      if (enemyShot.projectileOutOfMap()) this.deleteEnemyShot(index);
+      if (enemyShot.isColliding(character)) this.handleEnemyProjectileHit(character, enemyShot);
+      if (enemyShot.animationFinished) this.deleteEnemyShot(index);
     });
+  }
+
+  handleEnemyProjectileHit(character, enemyShot) {
+    character.isHit();
+    enemyShot.hasCollided = true;
   }
 
   checkPowerUpCollision(character) {
@@ -157,14 +147,8 @@ class World {
   checkPlayerProjectileCollisions() {
     this.level.enemies.forEach((enemy, enemyIndex) => {
       this.playerShots.forEach((shot, shotIndex) => {
-        if (shot.projectileOutOfMap()) () => this.deleteShot(shotIndex);
-
-        if (this.enemyIsHit(shot, enemy)) {
-          enemy.isHit();
-          this.checkIfEnemyIsDead(enemy, enemyIndex);
-          shot.speed = 0;
-          shot.hasCollided = true;
-        }
+        if (shot.projectileOutOfMap()) this.deleteShot(shotIndex);
+        if (this.enemyIsHit(shot, enemy)) this.shotHasHit(shot, enemy, enemyIndex);
         this.checkAnimationIsFinished(shot, shotIndex);
       });
     });
@@ -175,6 +159,15 @@ class World {
       setTimeout(() => {
         this.deleteEnemy(enemyIndex);
       }, 200);
+    }
+  }
+
+  shotHasHit(shot, enemy, enemyIndex) {
+    if (!shot.hasCollided) {
+      enemy.isHit();
+      this.checkIfEnemyIsDead(enemy, enemyIndex);
+      shot.speed = 0;
+      shot.hasCollided = true;
     }
   }
 
@@ -217,12 +210,16 @@ class World {
     this.draw();
     this.setWorld();
     this.checkCollisions();
-    document.getElementById("overlay").classList.add("d-none");
-    document.getElementById("game-over-overlay").classList.add("d-none");
+    this.hideOverlays();
 
     this.setGlobalInterval(() => this.startSidescroll(), 1000 / 60);
     this.setGlobalInterval(() => this.checkCollisions(), 1000 / 60);
     soundTrack.play();
+  }
+
+  hideOverlays() {
+    document.getElementById("overlay").classList.add("d-none");
+    document.getElementById("game-over-overlay").classList.add("d-none");
   }
 
   resetWord() {

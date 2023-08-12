@@ -16,10 +16,7 @@ class PowerUp extends MovableObject {
   }
 
   initiateClass() {
-    if (this.type === "HP") {
-      this.loadImage(this.HPImg);
-    } else if (this.type === "shield") {
-      this.loadImage(this.shieldImg);
-    }
+    if (this.type === "HP") this.loadImage(this.HPImg);
+    else if (this.type === "shield") this.loadImage(this.shieldImg);
   }
 }

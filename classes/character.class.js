@@ -51,27 +51,29 @@ class Character extends MovableObject {
 
   animate() {
     if (this.world) {
-      if (this.isDead()) {
-        this.animateImagesOnce(this.deathAnimation);
-        this.playExplosionSound();
-        flyingSound.pause();
-      } else if (this.isHurt()) {
-        this.animateImages(this.damageAnimation);
-      } else {
-        this.loadImage(this.shipIMG);
-      }
-      if (!this.isVisableOnCanvas()) {
-        this.kill();
-      }
-      if (this.movementKeyIsPressed()) {
-        this.handleCharacterMovement();
-        flyingSound.play();
-      } else if (this.shootKeyIsPressed()) {
-        this.handleCharacterMovement();
-        flyingSound.pause();
-      } else {
-        flyingSound.pause();
-      }
+      if (this.isDead()) this.handleDeath();
+      else if (this.isHurt()) this.animateImages(this.damageAnimation);
+      else this.loadImage(this.shipIMG);
+      if (!this.isVisableOnCanvas()) this.kill();
+      if (this.movementKeyIsPressed()) this.move();
+      else if (this.shootKeyIsPressed()) this.stopAndShoot();
+      else flyingSound.pause();
     }
+  }
+
+  handleDeath() {
+    this.animateImagesOnce(this.deathAnimation);
+    this.playExplosionSound();
+    flyingSound.pause();
+  }
+
+  move() {
+    this.handleCharacterMovement();
+    flyingSound.play();
+  }
+
+  stopAndShoot() {
+    this.handleCharacterMovement();
+    flyingSound.pause();
   }
 }

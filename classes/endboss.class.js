@@ -62,18 +62,19 @@ class EndBoss extends MovableObject {
   }
 
   animate() {
-    if (this.isDead()) {
-      this.currentImage = 0;
-      this.animateImagesOnce(this.deathAnimation);
-      endBossDeathSound.play();
-      setTimeout(() => {
-        this.world.stopGame();
-      }, 200);
-    } else if (this.isHurt()) {
-      this.animateImages(this.damageAnimation);
-    } else {
-      this.loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
-    }
+    if (this.isDead()) this.handleDeath();
+    else if (this.isHurt()) this.animateImages(this.damageAnimation);
+    else this.loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
+  }
+
+  handleDeath() {
+    this.currentImage = 0;
+    this.animateImagesOnce(this.deathAnimation);
+    endBossDeathSound.play();
+    setTimeout(() => {
+      this.world.stopGame();
+      showEndscreen(getVicoryHTML);
+    }, 200);
   }
 
   startFight() {

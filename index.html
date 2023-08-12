@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Name</title>
+    <title>Space Shooter</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="fonts.css" />
     <link
       rel="shortcut icon"
       href="../el-pollo-loco/img/logos/fav-icon.png"
@@ -41,11 +42,16 @@
   <body onload="init()">
     <div id="container">
       <canvas id="canvas" width="720" height="480"></canvas>
+      <div class="d-none" id="controls">
+        <img src="../el-pollo-loco/img/menue/keyboard01.jpg" alt="" />
+      </div>
+
       <div id="overlay">
         <img src="../el-pollo-loco/img/menue/space-shooter.png" alt="" />
         <div>
           <span>Play</span>
           <img
+            class="play-button"
             onclick="world.startGame()"
             src="../el-pollo-loco/img/menue/play-button.png"
             alt="play-button"
@@ -54,30 +60,42 @@
       </div>
       <div id="mobile-overlay">
         <div id="mobile-directions-container">
-          <div class="direction-button" id="left"></div>
-          <div class="direction-button" id="right"></div>
-          <div class="direction-button" id="up"></div>
-          <div class="direction-button" id="down"></div>
+          <div class="direction-button" id="left">
+            <img src="../el-pollo-loco/img/menue/arrow-left-solid (1).svg" alt="" />
+          </div>
+          <div class="direction-button" id="right">
+            <img src="../el-pollo-loco/img/menue/arrow-right-solid (1).svg" alt="" />
+          </div>
+          <div class="direction-button" id="up">
+            <img src="../el-pollo-loco/img/menue/arrow-up-solid.svg" alt="" />
+          </div>
+          <div class="direction-button" id="down">
+            <img src="../el-pollo-loco/img/menue/arrow-down-solid.svg" alt="" />
+          </div>
         </div>
-        <div id="mobile-shoot-container"><div id="space"></div></div>
-      </div>
-      <div class="d-none" id="game-over-overlay">
-        <img src="../el-pollo-loco/img/menue/victory.png" alt="victory img" />
-        <div>
-          <span>Play again</span>
-          <img
-            onclick="world.startGame()"
-            src="../el-pollo-loco/img/menue/play-button.png"
-            alt=""
-          />
+        <div id="mobile-shoot-container">
+          <div id="space">
+            <img src="../el-pollo-loco/img/menue/gun-solid.svg" alt="" />
+          </div>
         </div>
       </div>
+      <div class="d-none" id="game-over-overlay"></div>
       <div id="options-overlay">
+        <div
+          id="controls-button"
+          onmouseenter="toggleControls()"
+          onmouseleave="toggleControls()"
+        >
+          <img src="../el-pollo-loco/img/menue/keyboard-regular.svg" alt="" />
+        </div>
+        <div onclick="toggleMobileOverlay()">
+          <img src="../el-pollo-loco/img/menue/mobile-button-solid.svg" alt="" />
+        </div>
         <div id="mute-all-sounds-button" onclick="toggleAllSounds()">
-          <img src="../el-pollo-loco/img/menue/volume-high-solid.svg" alt="" />
+          <img src="../el-pollo-loco/img/menue/icons-sound-fx-on.png" alt="" />
         </div>
         <div id="mute-background-sound-button" onclick="toggleSoundTrack()">
-          <img src="../el-pollo-loco/img/menue/music-solid.svg" alt="" />
+          <img src="../el-pollo-loco/img/menue/icons-bg-music-on.png" alt="" />
         </div>
         <div id="full-screen-button" onclick="toggleFullscreen()">
           <img src="../el-pollo-loco/img/menue/expand-solid.svg" alt="" />

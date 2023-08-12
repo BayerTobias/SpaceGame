@@ -154,7 +154,6 @@ class MovableObject extends DrawableObject {
   isHealed(powerUpType) {
     if (this.HP < 100 && powerUpType === "HP") {
       this.HP += 10;
-      console.log(powerUpType);
     }
     if (this.shield < 100 && powerUpType === "shield") {
       this.shield += 50;
@@ -162,15 +161,9 @@ class MovableObject extends DrawableObject {
   }
 
   projectileOutOfMap() {
-    if (this instanceof PlayerProjectile) {
-      return this.x > this.shotFromX + 720;
-    }
-    if (this instanceof EnemyProjectile) {
-      return this.x < this.shotFromX - 720;
-    }
-    if (this instanceof Rocket) {
-      return this.y + this.height < 0;
-    }
+    if (this instanceof PlayerProjectile) return this.x > this.shotFromX + 720;
+    if (this instanceof EnemyProjectile) return this.x < this.shotFromX - 720;
+    if (this instanceof Rocket) return this.y + this.height < 0;
   }
 
   isVisableOnCanvas() {
