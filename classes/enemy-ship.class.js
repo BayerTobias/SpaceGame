@@ -32,17 +32,20 @@ class EnemyShip extends MovableObject {
     this.setLocalInterval(() => this.initiateClass(), 100);
   }
 
+  /**
+   * Initializes the class and sets up animations and intervals.
+   */
   initiateClass() {
     if (this.world) {
       this.setGlobalInterval(() => this.animate(), 1000 / this.fps);
       this.stopLocalIntervals();
-      this.setLocalInterval(
-        () => this.fireShots(),
-        1000 + Math.random() * 2000
-      );
+      this.setLocalInterval(() => this.fireShots(), 1000 + Math.random() * 2000);
     }
   }
 
+  /**
+   * Manages animation and behavior of the class.
+   */
   animate() {
     this.moveLeft();
     this.exhaust.x = this.x + 72;
@@ -54,6 +57,9 @@ class EnemyShip extends MovableObject {
     }
   }
 
+  /**
+   * Fires shots if the entity is visible on the canvas.
+   */
   fireShots() {
     if (this.isVisableOnCanvas()) {
       this.enemyShoot();

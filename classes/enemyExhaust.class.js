@@ -19,6 +19,9 @@ class enemyExhaust extends MovableObject {
     this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
 
+  /**
+   * Manages animation of the entity using the exhaust animation images.
+   */
   animate() {
     this.animateImages(this.enemyImagesExhaustAnimation);
   }

@@ -25,15 +25,14 @@ class EnemyProjectile extends MovableObject {
     this.shotFromX = object.x;
     this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
-
+  /**
+   * Manages animation and behavior of the object.
+   */
   animate() {
     this.moveLeft();
     if (this.hasCollided) {
       this.animateImagesOnce(this.projectileExpireImages);
-      if (
-        this.deathAnmimationCurrentImage ===
-        this.projectileExpireImages.length - 1
-      ) {
+      if (this.deathAnmimationCurrentImage === this.projectileExpireImages.length - 1) {
         this.animationFinished = true;
         this.stopLocalIntervals();
       }

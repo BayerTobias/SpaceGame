@@ -28,24 +28,22 @@ class Rocket extends MovableObject {
 
   constructor() {
     super();
-    this.loadImage(
-      "../el-pollo-loco/img/traps/rocket-trap/Rockett+Exhaust.png"
-    );
+    this.loadImage("../el-pollo-loco/img/traps/rocket-trap/Rockett+Exhaust.png");
     this.loadImages(this.flyingAnimationImages);
     this.loadImages(this.explosionAnimationImages);
     this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
 
+  /**
+   * Animates the object's behavior and appearance.
+   */
   animate() {
     if (!this.hasCollided) {
       this.animateImages(this.flyingAnimationImages);
       this.moveUp();
     } else {
       this.animateImagesOnce(this.explosionAnimationImages);
-      if (
-        this.deathAnmimationCurrentImage ===
-        this.explosionAnimationImages.length - 1
-      ) {
+      if (this.deathAnmimationCurrentImage === this.explosionAnimationImages.length - 1) {
         this.animationFinished = true;
       }
     }

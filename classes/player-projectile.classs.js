@@ -25,14 +25,14 @@ class PlayerProjectile extends MovableObject {
     this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
 
+  /**
+   * Animates the object's movement and handles collision animation.
+   */
   animate() {
     this.moveRight();
     if (this.hasCollided) {
       this.animateImagesOnce(this.projectileExpireImages);
-      if (
-        this.deathAnmimationCurrentImage ===
-        this.projectileExpireImages.length - 1
-      ) {
+      if (this.deathAnmimationCurrentImage === this.projectileExpireImages.length - 1) {
         this.animationFinished = true;
         this.stopLocalIntervals();
       }

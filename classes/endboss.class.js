@@ -48,6 +48,9 @@ class EndBoss extends MovableObject {
     this.setLocalInterval(() => this.initiateClass(), 100);
   }
 
+  /**
+   * Initiates the class and performs specific actions based on world and camera conditions.
+   */
   initiateClass() {
     if (this.world && this.world.camera_x > 850) {
       endBossIntroductionSound.play();
@@ -61,12 +64,18 @@ class EndBoss extends MovableObject {
     }
   }
 
+  /**
+   * Manages animation based on the object's current state.
+   */
   animate() {
     if (this.isDead()) this.handleDeath();
     else if (this.isHurt()) this.animateImages(this.damageAnimation);
     else this.loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
   }
 
+  /**
+   * Handles the entity's death animation and related actions.
+   */
   handleDeath() {
     this.currentImage = 0;
     this.animateImagesOnce(this.deathAnimation);
@@ -77,6 +86,9 @@ class EndBoss extends MovableObject {
     }, 200);
   }
 
+  /**
+   * Manages the movement behavior of the entity during a fight.
+   */
   startFight() {
     if (this.hitTop) {
       this.y++;

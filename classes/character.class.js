@@ -42,6 +42,9 @@ class Character extends MovableObject {
     this.setLocalInterval(() => this.initiateClass(), 1000 / this.fps);
   }
 
+  /**
+   * checks if world exists if so starts an interval of the animate function
+   */
   initiateClass() {
     if (this.world) {
       this.setGlobalInterval(() => this.animate(), 1000 / this.fps);
@@ -49,6 +52,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * this function checks the status of the character and invokes the responding function
+   */
   animate() {
     if (this.world) {
       if (this.isDead()) this.handleDeath();
@@ -61,17 +67,26 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * this function is a support function to the animate function and handels the death of the character
+   */
   handleDeath() {
     this.animateImagesOnce(this.deathAnimation);
     this.playExplosionSound();
     flyingSound.pause();
   }
 
+  /**
+   * this function is a support function to the animate function and handels character movement
+   */
   move() {
     this.handleCharacterMovement();
     flyingSound.play();
   }
 
+  /**
+   * this function is a support function to the animate function and handels when the character stops and shoots
+   */
   stopAndShoot() {
     this.handleCharacterMovement();
     flyingSound.pause();

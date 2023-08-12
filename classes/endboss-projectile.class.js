@@ -38,6 +38,9 @@ class EndBossProjectile extends MovableObject {
     this.setLocalInterval(() => this.animate(), 1000 / this.fps);
   }
 
+  /**
+   * animates the projectile
+   */
   animate() {
     this.moveLeft();
     if (this.timeToExplode() && !this.animationStarted) {
@@ -47,6 +50,9 @@ class EndBossProjectile extends MovableObject {
     }
   }
 
+  /**
+   * initiates the detonation of a shot, triggering explosion animations and related actions.
+   */
   detonateShot() {
     this.playLaserExplosionSound();
     if (this.deathAnmimationCurrentImage < this.explosionAnimationImages.length) {
@@ -61,15 +67,26 @@ class EndBossProjectile extends MovableObject {
     }
   }
 
+  /**
+   * checks if it is time for the shot to explode based on its position and detonation conditions.
+   *
+   * @returns {boolean} returns true if it is time to explode, otherwise false.
+   */
   timeToExplode() {
     return this.x < this.shotFromX - 50 - this.detonateAfter;
   }
 
+  /**
+   * Adjusts the explosion by extending its dimensions.
+   */
   extendExplosion() {
     this.offsetX -= 4;
     this.offsetY -= 4;
   }
 
+  /**
+   * Plays the laser explosion sound if it has not been played before.
+   */
   playLaserExplosionSound() {
     if (!this.explosionSoundPlayed) {
       let clonedSound = endBossLaserExplosionSound.cloneNode();

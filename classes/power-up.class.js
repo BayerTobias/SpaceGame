@@ -15,6 +15,9 @@ class PowerUp extends MovableObject {
     this.initiateClass();
   }
 
+  /**
+   * Initializes the class based on the power-up type.
+   */
   initiateClass() {
     if (this.type === "HP") this.loadImage(this.HPImg);
     else if (this.type === "shield") this.loadImage(this.shieldImg);

@@ -1,3 +1,6 @@
+/**
+ * Returns the HTML content for the victory screen.
+ */
 function getVicoryHTML() {
   return /*html*/ `
     <img src="../el-pollo-loco/img/menue/victory.png" alt="victory img" />
@@ -13,6 +16,9 @@ function getVicoryHTML() {
   `;
 }
 
+/**
+ * Returns the HTML content for the defeat screen.
+ */
 function getDefeatHTML() {
   return /*html*/ `
     <img src="../el-pollo-loco/img/menue/defeat.png" alt="defeat img" />

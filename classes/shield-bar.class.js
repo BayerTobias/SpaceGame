@@ -18,6 +18,9 @@ class ShieldBar extends StatusBar {
     this.setLocalInterval(() => this.checkPercent(), 1000 / this.fps);
   }
 
+  /**
+   * Checks the shield percentage of the character in the world.
+   */
   checkPercent() {
     if (this.world) this.setPercentage(this.world.level.character.shield);
   }

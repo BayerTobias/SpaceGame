@@ -20,6 +20,9 @@ class playerExhaust extends MovableObject {
     this.setLocalInterval(() => this.initiateClass(), 100);
   }
 
+  /**
+   * Initializes the class and sets up animation intervals.
+   */
   initiateClass() {
     if (this.world) {
       this.setGlobalInterval(() => this.animate(), 1000 / (2 * this.fps));
@@ -27,6 +30,9 @@ class playerExhaust extends MovableObject {
     }
   }
 
+  /**
+   * Manages animation and behavior of the entity based on movement keys.
+   */
   animate() {
     if (this.movementKeyIsPressed()) {
       this.handleExhaustMovement();
@@ -36,6 +42,9 @@ class playerExhaust extends MovableObject {
     }
   }
 
+  /**
+   * Manages the movement of the exhaust based on the character's position.
+   */
   handleExhaustMovement() {
     this.x = this.world.level.character.x - 17;
     this.y = this.world.level.character.y + 25;

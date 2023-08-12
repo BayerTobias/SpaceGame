@@ -17,6 +17,9 @@ class HpBar extends StatusBar {
     this.setLocalInterval(() => this.checkPercent(), 1000 / this.fps);
   }
 
+  /**
+   * Checks the percentage of the character's HP and updates the object's state accordingly.
+   */
   checkPercent() {
     if (this.world) {
       this.setPercentage(this.world.level.character.HP);

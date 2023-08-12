@@ -25,6 +25,9 @@ class RocketSilo extends MovableObject {
     this.setLocalInterval(() => this.initiateClass(), 100);
   }
 
+  /**
+   * Initializes the class and sets up animation intervals.
+   */
   initiateClass() {
     if (this.world) {
       this.setGlobalInterval(() => this.animate(), 200);
@@ -32,6 +35,9 @@ class RocketSilo extends MovableObject {
     }
   }
 
+  /**
+   * Animates the object's behavior and appearance.
+   */
   animate() {
     if (this.inFiringZone(this.world.level.character) && this.shotCooldown()) {
       this.fireRocket();
@@ -40,10 +46,19 @@ class RocketSilo extends MovableObject {
     if (this.characterHasEntered) this.animateImagesOnce(this.openSiloAnimationImages);
   }
 
+  /**
+   * Checks if the character is within the object's firing zone.
+   *
+   * @param {Object} character - The character object to check against.
+   * @returns {boolean} Returns true if the character is within the firing zone, otherwise false.
+   */
   inFiringZone(character) {
     return character.x < this.x && character.x > 150;
   }
 
+  /**
+   * Initiates the firing of a rocket.
+   */
   fireRocket() {
     this.deathAnmimationCurrentImage = 0;
     this.lastShot = new Date().getTime();

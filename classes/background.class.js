@@ -10,9 +10,10 @@ class Background extends MovableObject {
     this.setLocalInterval(() => this.animateSidescroll(), 1000 / this.fps);
   }
 
+  /**
+   * moves the background image in the camera frame
+   */
   animateSidescroll() {
-    if (this.world) {
-      this.x = this.world.camera_x;
-    }
+    if (this.world) this.x = this.world.camera_x;
   }
 }
