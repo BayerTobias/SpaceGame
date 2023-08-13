@@ -6,11 +6,7 @@
     <title>Space Shooter</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="fonts.css" />
-    <link
-      rel="shortcut icon"
-      href="../el-pollo-loco/img/logos/fav-icon.png"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="../el-pollo-loco/img/logos/fav-icon.png" type="image/x-icon" />
     <script src="../el-pollo-loco/js/audio.js"></script>
     <script src="../el-pollo-loco/js/HTML-tamplates.js"></script>
     <script src="../el-pollo-loco/classes/world.class.js"></script>
@@ -44,6 +40,9 @@
       <canvas id="canvas" width="720" height="480"></canvas>
       <div class="d-none" id="controls">
         <img src="../el-pollo-loco/img/menue/keyboard01.jpg" alt="" />
+      </div>
+      <div class="d-none" id="rotate-phone-overlay">
+        <img src="../el-pollo-loco/img/menue/icons-flip-screen-white.png" alt="" />
       </div>
 
       <div id="overlay">
@@ -81,11 +80,7 @@
       </div>
       <div class="d-none" id="game-over-overlay"></div>
       <div id="options-overlay">
-        <div
-          id="controls-button"
-          onmouseenter="toggleControls()"
-          onmouseleave="toggleControls()"
-        >
+        <div id="controls-button" onmouseenter="toggleControls()" onmouseleave="toggleControls()">
           <img src="../el-pollo-loco/img/menue/keyboard-regular.svg" alt="" />
         </div>
         <div onclick="toggleMobileOverlay()">

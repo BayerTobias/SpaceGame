@@ -6,6 +6,7 @@ function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
   handleMobileInputs();
+  checkIfLandscapeMode();
 }
 
 window.addEventListener("keydown", (event) => {
@@ -23,6 +24,19 @@ window.addEventListener("keyup", (event) => {
   handleKeyPress(event.code, "ArrowUp", "up", false);
   handleKeyPress(event.code, "Space", "space", false);
 });
+
+window.addEventListener("resize", () => checkIfLandscapeMode());
+
+/**
+ * Checks if the device is in landscape mode and displays an overlay message if necessary.
+ */
+function checkIfLandscapeMode() {
+  const overlay = document.getElementById("rotate-phone-overlay");
+
+  if (window.innerWidth < 730 && window.innerWidth < window.innerHeight)
+    overlay.classList.remove("d-none");
+  else overlay.classList.add("d-none");
+}
 
 /**
  * Handles mobile input buttons and sets event listeners.

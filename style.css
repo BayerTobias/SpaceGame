@@ -189,6 +189,23 @@ canvas {
   height: 100%;
 }
 
+#rotate-phone-overlay {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 300;
+}
+
+#rotate-phone-overlay > img {
+  height: 90%;
+}
+
 @media (max-width: 730px) {
   canvas {
     width: 100vw;
@@ -222,5 +239,17 @@ canvas {
 
   h1 {
     display: none;
+  }
+
+  #container {
+    border: unset;
+  }
+
+  #full-screen-button {
+    display: none !important;
+  }
+
+  #controls-button {
+    display: none !important;
   }
 }
