@@ -115,7 +115,7 @@ function muteSoundTrack() {
   const img = document.getElementById("mute-background-sound-button").querySelector("img");
 
   soundTrack.muted = true;
-  img.src = "../el-pollo-loco/img/menue/icons-bg-music-off.png";
+  img.src = "./img/menue/icons-bg-music-off.png";
 }
 
 /**
@@ -125,7 +125,7 @@ function ummuteSoundTrack() {
   const img = document.getElementById("mute-background-sound-button").querySelector("img");
 
   soundTrack.muted = false;
-  img.src = "../el-pollo-loco/img/menue/icons-bg-music-on.png";
+  img.src = "./img/menue/icons-bg-music-on.png";
 }
 
 /**
@@ -149,7 +149,7 @@ function toggleAllSounds() {
 function muteAllSounds(img) {
   allSounds.forEach((sound) => (sound.muted = true));
   muted = true;
-  img.src = "../el-pollo-loco/img/menue/icons-sound-fx-off.png";
+  img.src = "./img/menue/icons-sound-fx-off.png";
 }
 
 /**
@@ -160,7 +160,7 @@ function muteAllSounds(img) {
 function unmuteAllSounds(img) {
   allSounds.forEach((sound) => (sound.muted = false));
   muted = false;
-  img.src = "../el-pollo-loco/img/menue/icons-sound-fx-on.png";
+  img.src = "./img/menue/icons-sound-fx-on.png";
 }
 
 /**
@@ -188,7 +188,7 @@ function toggleFullscreen() {
 function enterFullscreen(container, canvas, img) {
   container.requestFullscreen();
   canvas.classList.add("fullscreen");
-  img.src = "../el-pollo-loco/img/menue/compress-solid.svg";
+  img.src = "./img/menue/compress-solid.svg";
 }
 
 /**
@@ -200,7 +200,7 @@ function enterFullscreen(container, canvas, img) {
 function exitFullscreen(canvas, img) {
   document.exitFullscreen();
   canvas.classList.remove("fullscreen");
-  img.src = "../el-pollo-loco/img/menue/expand-solid.svg";
+  img.src = "./img/menue/expand-solid.svg";
 }
 
 /**

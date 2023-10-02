@@ -1,7 +1,7 @@
 class PowerUp extends MovableObject {
   type;
-  HPImg = "../el-pollo-loco/img/interface/HP3.png";
-  shieldImg = "../el-pollo-loco/img/interface/Shield3.png";
+  HPImg = "./img/interface/HP3.png";
+  shieldImg = "./img/interface/Shield3.png";
 
   constructor(type, x, y) {
     super();

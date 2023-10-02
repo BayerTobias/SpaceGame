@@ -6,53 +6,53 @@
     <title>Space Shooter</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="fonts.css" />
-    <link rel="shortcut icon" href="../el-pollo-loco/img/logos/fav-icon.png" type="image/x-icon" />
-    <script src="../el-pollo-loco/js/audio.js"></script>
-    <script src="../el-pollo-loco/js/HTML-tamplates.js"></script>
-    <script src="../el-pollo-loco/classes/world.class.js"></script>
-    <script src="../el-pollo-loco/classes/drawable-object.class.js"></script>
-    <script src="../el-pollo-loco/classes/interface-hud.class.js"></script>
-    <script src="../el-pollo-loco/classes/status-bar.class.js"></script>
-    <script src="../el-pollo-loco/classes/hp-bar.class.js"></script>
-    <script src="../el-pollo-loco/classes/shield-bar.class.js"></script>
-    <script src="../el-pollo-loco/classes/interface-icon.class.js"></script>
-    <script src="../el-pollo-loco/classes/movable-object.class.js"></script>
-    <script src="../el-pollo-loco/classes/character.class.js"></script>
-    <script src="../el-pollo-loco/classes/exhaust.class.js"></script>
-    <script src="../el-pollo-loco/classes/enemy-ship.class.js"></script>
-    <script src="../el-pollo-loco/classes/enemyExhaust.class.js"></script>
-    <script src="../el-pollo-loco/classes/endboss.class.js"></script>
-    <script src="../el-pollo-loco/classes/endboss-projectile.class.js"></script>
-    <script src="../el-pollo-loco/classes/power-up.class.js"></script>
-    <script src="../el-pollo-loco/classes/rocket-silo.js"></script>
-    <script src="../el-pollo-loco/classes/rocket.class.js"></script>
-    <script src="../el-pollo-loco/classes/player-projectile.classs.js"></script>
-    <script src="../el-pollo-loco/classes/enemy-projectile.class.js"></script>
-    <script src="../el-pollo-loco/classes/background.class.js"></script>
-    <script src="../el-pollo-loco/classes/map-element.class.js"></script>
-    <script src="../el-pollo-loco/classes/keyboard.class.js"></script>
-    <script src="../el-pollo-loco/classes/level.class.js"></script>
-    <script src="../el-pollo-loco/levels/level1.js"></script>
-    <script src="../el-pollo-loco/js/game.js"></script>
+    <link rel="shortcut icon" href="./img/logos/fav-icon.png" type="image/x-icon" />
+    <script src="./js/audio.js"></script>
+    <script src="./js/HTML-tamplates.js"></script>
+    <script src="./classes/world.class.js"></script>
+    <script src="./classes/drawable-object.class.js"></script>
+    <script src="./classes/interface-hud.class.js"></script>
+    <script src="./classes/status-bar.class.js"></script>
+    <script src="./classes/hp-bar.class.js"></script>
+    <script src="./classes/shield-bar.class.js"></script>
+    <script src="./classes/interface-icon.class.js"></script>
+    <script src="./classes/movable-object.class.js"></script>
+    <script src="./classes/character.class.js"></script>
+    <script src="./classes/exhaust.class.js"></script>
+    <script src="./classes/enemy-ship.class.js"></script>
+    <script src="./classes/enemyExhaust.class.js"></script>
+    <script src="./classes/endboss.class.js"></script>
+    <script src="./classes/endboss-projectile.class.js"></script>
+    <script src="./classes/power-up.class.js"></script>
+    <script src="./classes/rocket-silo.js"></script>
+    <script src="./classes/rocket.class.js"></script>
+    <script src="./classes/player-projectile.classs.js"></script>
+    <script src="./classes/enemy-projectile.class.js"></script>
+    <script src="./classes/background.class.js"></script>
+    <script src="./classes/map-element.class.js"></script>
+    <script src="./classes/keyboard.class.js"></script>
+    <script src="./classes/level.class.js"></script>
+    <script src="./levels/level1.js"></script>
+    <script src="./js/game.js"></script>
   </head>
   <body onload="init()">
     <div id="container">
       <canvas id="canvas" width="720" height="480"></canvas>
       <div class="d-none" id="controls">
-        <img src="../el-pollo-loco/img/menue/keyboard01.jpg" alt="" />
+        <img src="./img/menue/keyboard01.jpg" alt="" />
       </div>
       <div class="d-none" id="rotate-phone-overlay">
-        <img src="../el-pollo-loco/img/menue/icons-flip-screen-white.png" alt="" />
+        <img src="./img/menue/icons-flip-screen-white.png" alt="" />
       </div>
 
       <div id="overlay">
-        <img src="../el-pollo-loco/img/menue/space-shooter.png" alt="" />
+        <img src="./img/menue/space-shooter.png" alt="" />
         <div>
           <span>Play</span>
           <img
             class="play-button"
             onclick="world.startGame()"
-            src="../el-pollo-loco/img/menue/play-button.png"
+            src="./img/menue/play-button.png"
             alt="play-button"
           />
         </div>
@@ -60,40 +60,40 @@
       <div id="mobile-overlay">
         <div id="mobile-directions-container">
           <div class="direction-button" id="left">
-            <img src="../el-pollo-loco/img/menue/arrow-left-solid (1).svg" alt="" />
+            <img src="./img/menue/arrow-left-solid (1).svg" alt="" />
           </div>
           <div class="direction-button" id="right">
-            <img src="../el-pollo-loco/img/menue/arrow-right-solid (1).svg" alt="" />
+            <img src="./img/menue/arrow-right-solid (1).svg" alt="" />
           </div>
           <div class="direction-button" id="up">
-            <img src="../el-pollo-loco/img/menue/arrow-up-solid.svg" alt="" />
+            <img src="./img/menue/arrow-up-solid.svg" alt="" />
           </div>
           <div class="direction-button" id="down">
-            <img src="../el-pollo-loco/img/menue/arrow-down-solid.svg" alt="" />
+            <img src="./img/menue/arrow-down-solid.svg" alt="" />
           </div>
         </div>
         <div id="mobile-shoot-container">
           <div id="space">
-            <img src="../el-pollo-loco/img/menue/gun-solid.svg" alt="" />
+            <img src="./img/menue/gun-solid.svg" alt="" />
           </div>
         </div>
       </div>
       <div class="d-none" id="game-over-overlay"></div>
       <div id="options-overlay">
         <div id="controls-button" onmouseenter="toggleControls()" onmouseleave="toggleControls()">
-          <img src="../el-pollo-loco/img/menue/keyboard-regular.svg" alt="" />
+          <img src="./img/menue/keyboard-regular.svg" alt="" />
         </div>
         <div onclick="toggleMobileOverlay()">
-          <img src="../el-pollo-loco/img/menue/mobile-button-solid.svg" alt="" />
+          <img src="./img/menue/mobile-button-solid.svg" alt="" />
         </div>
         <div id="mute-all-sounds-button" onclick="toggleAllSounds()">
-          <img src="../el-pollo-loco/img/menue/icons-sound-fx-on.png" alt="" />
+          <img src="./img/menue/icons-sound-fx-on.png" alt="" />
         </div>
         <div id="mute-background-sound-button" onclick="toggleSoundTrack()">
-          <img src="../el-pollo-loco/img/menue/icons-bg-music-on.png" alt="" />
+          <img src="./img/menue/icons-bg-music-on.png" alt="" />
         </div>
         <div id="full-screen-button" onclick="toggleFullscreen()">
-          <img src="../el-pollo-loco/img/menue/expand-solid.svg" alt="" />
+          <img src="./img/menue/expand-solid.svg" alt="" />
         </div>
       </div>
     </div>

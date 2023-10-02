@@ -3,36 +3,36 @@ class Character extends MovableObject {
   offsetY = 30;
   offsetX = 10;
   speed = 4;
-  shipIMG = "../el-pollo-loco/img/player-ship/ship_asset7.png";
+  shipIMG = "./img/player-ship/ship_asset7.png";
 
   immuneTime = 500;
 
   damageAnimation = [
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_000.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_001.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_002.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_003.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_004.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_005.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_006.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_007.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_008.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_009.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_010.png",
-    "../el-pollo-loco/img/player-ship/isHurtIMG/Ship1_lvl7_damage_011.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_000.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_001.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_002.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_003.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_004.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_005.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_006.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_007.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_008.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_009.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_010.png",
+    "./img/player-ship/isHurtIMG/Ship1_lvl7_damage_011.png",
   ];
   deathAnimation = [
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_001.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_002.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_003.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_004.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_005.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_006.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_007.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_008.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_009.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_010.png",
-    "../el-pollo-loco/img/player-ship/deathAnimation/Lvl7_explotion_011.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_001.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_002.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_003.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_004.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_005.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_006.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_007.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_008.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_009.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_010.png",
+    "./img/player-ship/deathAnimation/Lvl7_explotion_011.png",
   ];
 
   constructor() {

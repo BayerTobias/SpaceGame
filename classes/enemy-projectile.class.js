@@ -9,15 +9,15 @@ class EnemyProjectile extends MovableObject {
   otherDirection = true;
 
   projectileExpireImages = [
-    "../el-pollo-loco/img/projectiles/enemys/shot3_exp1.png",
-    "../el-pollo-loco/img/projectiles/enemys/shot3_exp2.png",
-    "../el-pollo-loco/img/projectiles/enemys/shot3_exp3.png",
-    "../el-pollo-loco/img/projectiles/enemys/shot3_exp4.png",
+    "./img/projectiles/enemys/shot3_exp1.png",
+    "./img/projectiles/enemys/shot3_exp2.png",
+    "./img/projectiles/enemys/shot3_exp3.png",
+    "./img/projectiles/enemys/shot3_exp4.png",
   ];
 
   constructor(object) {
     super();
-    this.loadImage("../el-pollo-loco/img/projectiles/enemys/shot3_asset.png");
+    this.loadImage("./img/projectiles/enemys/shot3_asset.png");
     this.loadImages(this.projectileExpireImages);
 
     this.x = object.x - 15;

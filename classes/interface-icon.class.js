@@ -1,8 +1,8 @@
 class InterfaceIcon extends DrawableObject {
   interfaceImages = [
-    "../el-pollo-loco/img/interface/character.png",
-    "../el-pollo-loco/img/interface/HP3.png",
-    "../el-pollo-loco/img/interface/Shield3.png",
+    "./img/interface/character.png",
+    "./img/interface/HP3.png",
+    "./img/interface/Shield3.png",
   ];
   constructor(x, y, width, height, index) {
     super();

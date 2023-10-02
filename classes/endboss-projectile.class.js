@@ -11,19 +11,19 @@ class EndBossProjectile extends MovableObject {
   otherDirection = true;
   explosionSoundPlayed;
 
-  projectileImg = "../el-pollo-loco/img/projectiles/endboss/Shot1_asset.png";
+  projectileImg = "./img/projectiles/endboss/Shot1_asset.png";
 
   explosionAnimationImages = [
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp1.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp2.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp3.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp4.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp5.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp6.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp7.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp8.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp9.png",
-    "../el-pollo-loco/img/projectiles/endboss/Shot1_exp10.png",
+    "./img/projectiles/endboss/Shot1_exp1.png",
+    "./img/projectiles/endboss/Shot1_exp2.png",
+    "./img/projectiles/endboss/Shot1_exp3.png",
+    "./img/projectiles/endboss/Shot1_exp4.png",
+    "./img/projectiles/endboss/Shot1_exp5.png",
+    "./img/projectiles/endboss/Shot1_exp6.png",
+    "./img/projectiles/endboss/Shot1_exp7.png",
+    "./img/projectiles/endboss/Shot1_exp8.png",
+    "./img/projectiles/endboss/Shot1_exp9.png",
+    "./img/projectiles/endboss/Shot1_exp10.png",
   ];
 
   constructor(x, y) {

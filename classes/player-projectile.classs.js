@@ -1,10 +1,10 @@
 class PlayerProjectile extends MovableObject {
   projectileExpireImages = [
-    "../el-pollo-loco/img/projectiles/player/fire_exp1.png",
-    "../el-pollo-loco/img/projectiles/player/fire_exp2.png",
-    "../el-pollo-loco/img/projectiles/player/fire_exp3.png",
-    "../el-pollo-loco/img/projectiles/player/fire_exp4.png",
-    "../el-pollo-loco/img/projectiles/player/fire_exp5.png",
+    "./img/projectiles/player/fire_exp1.png",
+    "./img/projectiles/player/fire_exp2.png",
+    "./img/projectiles/player/fire_exp3.png",
+    "./img/projectiles/player/fire_exp4.png",
+    "./img/projectiles/player/fire_exp5.png",
   ];
   speed = 10;
   width = 64;
@@ -16,7 +16,7 @@ class PlayerProjectile extends MovableObject {
 
   constructor(object) {
     super();
-    this.loadImage("../el-pollo-loco/img/projectiles/player/fire_asset.png");
+    this.loadImage("./img/projectiles/player/fire_asset.png");
     this.loadImages(this.projectileExpireImages);
 
     this.x = object.x + object.width - 10;

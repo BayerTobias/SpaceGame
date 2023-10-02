@@ -5,22 +5,22 @@ class RocketSilo extends MovableObject {
   characterHasEntered;
 
   openSiloAnimationImages = [
-    "../el-pollo-loco/img/traps/rocket-trap/Gates.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates2.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates3.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates4.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates5.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates6.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates5.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates4.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates3.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates2.png",
-    "../el-pollo-loco/img/traps/rocket-trap/Gates.png",
+    "./img/traps/rocket-trap/Gates.png",
+    "./img/traps/rocket-trap/Gates2.png",
+    "./img/traps/rocket-trap/Gates3.png",
+    "./img/traps/rocket-trap/Gates4.png",
+    "./img/traps/rocket-trap/Gates5.png",
+    "./img/traps/rocket-trap/Gates6.png",
+    "./img/traps/rocket-trap/Gates5.png",
+    "./img/traps/rocket-trap/Gates4.png",
+    "./img/traps/rocket-trap/Gates3.png",
+    "./img/traps/rocket-trap/Gates2.png",
+    "./img/traps/rocket-trap/Gates.png",
   ];
 
   constructor() {
     super();
-    this.loadImage("../el-pollo-loco/img/traps/rocket-trap/Gates.png");
+    this.loadImage("./img/traps/rocket-trap/Gates.png");
     this.loadImages(this.openSiloAnimationImages);
     this.setLocalInterval(() => this.initiateClass(), 100);
   }

@@ -10,21 +10,21 @@ class EnemyShip extends MovableObject {
   immuneTime = 100;
 
   deathAnimation = [
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_000.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_004.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_005.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_007.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_009.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_012.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_013.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_015.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_018.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_019.png",
-    "../el-pollo-loco/img/enemy-ships/Ship3_Explosion/Ship3_Explosion_021.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_000.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_004.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_005.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_007.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_009.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_012.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_013.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_015.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_018.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_019.png",
+    "./img/enemy-ships/Ship3_Explosion/Ship3_Explosion_021.png",
   ];
 
   constructor(minX) {
-    super().loadImage("../el-pollo-loco/img/enemy-ships/Ship3.png");
+    super().loadImage("./img/enemy-ships/Ship3.png");
     this.offsetY = 30;
     this.offsetX = 15;
     this.x = minX + Math.random() * 500;

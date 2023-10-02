@@ -6,7 +6,7 @@ class Background extends MovableObject {
   world;
 
   constructor() {
-    super().loadImage("../el-pollo-loco/img/background/Space2.png");
+    super().loadImage("./img/background/Space2.png");
     this.setLocalInterval(() => this.animateSidescroll(), 1000 / this.fps);
   }
 

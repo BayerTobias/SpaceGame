@@ -13,33 +13,33 @@ class EndBoss extends MovableObject {
   hitBottom;
 
   damageAnimation = [
-    "../el-pollo-loco/img/endboss/endboss-damage/Boss1_lvl7_damage_000.png",
-    "../el-pollo-loco/img/endboss/endboss-damage/Boss1_lvl7_damage_001.png",
-    "../el-pollo-loco/img/endboss/endboss-damage/Boss1_lvl7_damage_002.png",
-    "../el-pollo-loco/img/endboss/endboss-damage/Boss1_lvl7_damage_003.png",
-    "../el-pollo-loco/img/endboss/endboss-damage/Boss1_lvl7_damage_004.png",
-    "../el-pollo-loco/img/endboss/endboss-damage/Boss1_lvl7_damage_005.png",
+    "./img/endboss/endboss-damage/Boss1_lvl7_damage_000.png",
+    "./img/endboss/endboss-damage/Boss1_lvl7_damage_001.png",
+    "./img/endboss/endboss-damage/Boss1_lvl7_damage_002.png",
+    "./img/endboss/endboss-damage/Boss1_lvl7_damage_003.png",
+    "./img/endboss/endboss-damage/Boss1_lvl7_damage_004.png",
+    "./img/endboss/endboss-damage/Boss1_lvl7_damage_005.png",
   ];
 
   deathAnimation = [
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_002.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_006.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_008.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_010.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_011.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_012.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_015.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_017.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_018.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_022.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_023.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_024.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_027.png",
-    "../el-pollo-loco/img/endboss/endboss-explosion/Level7_029.png",
+    "./img/endboss/endboss-explosion/Level7_002.png",
+    "./img/endboss/endboss-explosion/Level7_006.png",
+    "./img/endboss/endboss-explosion/Level7_008.png",
+    "./img/endboss/endboss-explosion/Level7_010.png",
+    "./img/endboss/endboss-explosion/Level7_011.png",
+    "./img/endboss/endboss-explosion/Level7_012.png",
+    "./img/endboss/endboss-explosion/Level7_015.png",
+    "./img/endboss/endboss-explosion/Level7_017.png",
+    "./img/endboss/endboss-explosion/Level7_018.png",
+    "./img/endboss/endboss-explosion/Level7_022.png",
+    "./img/endboss/endboss-explosion/Level7_023.png",
+    "./img/endboss/endboss-explosion/Level7_024.png",
+    "./img/endboss/endboss-explosion/Level7_027.png",
+    "./img/endboss/endboss-explosion/Level7_029.png",
   ];
 
   constructor() {
-    super().loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
+    super().loadImage("./img/endboss/Boss_ship7.png");
     this.offsetX = 45;
     this.offsetY = 90;
     this.loadImages(this.damageAnimation);
@@ -70,7 +70,7 @@ class EndBoss extends MovableObject {
   animate() {
     if (this.isDead()) this.handleDeath();
     else if (this.isHurt()) this.animateImages(this.damageAnimation);
-    else this.loadImage("../el-pollo-loco/img/endboss/Boss_ship7.png");
+    else this.loadImage("./img/endboss/Boss_ship7.png");
   }
 
   /**

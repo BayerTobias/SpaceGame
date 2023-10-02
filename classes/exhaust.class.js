@@ -4,18 +4,16 @@ class playerExhaust extends MovableObject {
   height = 50;
   width = 50;
   imagesExhaustAnimation = [
-    "../el-pollo-loco/img/player-ship/engineAnimation4x/ship1_flight_lvl7_001.png",
-    "../el-pollo-loco/img/player-ship/engineAnimation4x/ship1_flight_lvl7_002.png",
-    "../el-pollo-loco/img/player-ship/engineAnimation4x/ship1_flight_lvl7_003.png",
-    "../el-pollo-loco/img/player-ship/engineAnimation4x/ship1_flight_lvl7_004.png",
+    "./img/player-ship/engineAnimation4x/ship1_flight_lvl7_001.png",
+    "./img/player-ship/engineAnimation4x/ship1_flight_lvl7_002.png",
+    "./img/player-ship/engineAnimation4x/ship1_flight_lvl7_003.png",
+    "./img/player-ship/engineAnimation4x/ship1_flight_lvl7_004.png",
   ];
   currentImage = 0;
   world;
 
   constructor() {
-    super().loadImage(
-      "../el-pollo-loco/img/player-ship/engineAnimation4x/ship1_flight_lvl7_001.png"
-    );
+    super().loadImage("./img/player-ship/engineAnimation4x/ship1_flight_lvl7_001.png");
     this.loadImages(this.imagesExhaustAnimation);
     this.setLocalInterval(() => this.initiateClass(), 100);
   }
