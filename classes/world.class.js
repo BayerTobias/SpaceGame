@@ -177,7 +177,8 @@ class World {
   checkEnemyProjectileCollisions(character) {
     this.enemyShots.forEach((enemyShot, index) => {
       if (enemyShot.projectileOutOfMap()) this.deleteEnemyShot(index);
-      if (enemyShot.isColliding(character)) this.handleEnemyProjectileHit(character, enemyShot);
+      if (enemyShot.isColliding(character))
+        this.handleEnemyProjectileHit(character, enemyShot);
       if (enemyShot.animationFinished) this.deleteEnemyShot(index);
     });
   }
@@ -332,10 +333,12 @@ class World {
     this.setWorld();
     this.checkCollisions();
     this.hideOverlays();
-
     this.setGlobalInterval(() => this.startSidescroll(), 1000 / 60);
     this.setGlobalInterval(() => this.checkCollisions(), 1000 / 60);
     soundTrack.play();
+    if (mobile) {
+      document.getElementById("mobile-overlay").classList.remove("d-none");
+    }
   }
 
   /**

@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let mobile = false;
 
 function init() {
   canvas = document.getElementById("canvas");
@@ -112,7 +113,9 @@ function toggleSoundTrack() {
  * Mutes the sound track and updates the mute button icon.
  */
 function muteSoundTrack() {
-  const img = document.getElementById("mute-background-sound-button").querySelector("img");
+  const img = document
+    .getElementById("mute-background-sound-button")
+    .querySelector("img");
 
   soundTrack.muted = true;
   img.src = "./img/menue/icons-bg-music-off.png";
@@ -122,7 +125,9 @@ function muteSoundTrack() {
  * Unmutes the sound track and updates the mute button icon.
  */
 function ummuteSoundTrack() {
-  const img = document.getElementById("mute-background-sound-button").querySelector("img");
+  const img = document
+    .getElementById("mute-background-sound-button")
+    .querySelector("img");
 
   soundTrack.muted = false;
   img.src = "./img/menue/icons-bg-music-on.png";
@@ -231,9 +236,11 @@ function toggleMobileOverlay() {
   const mobileOverlay = document.getElementById("mobile-overlay");
 
   if (!mobileOverlay.checkVisibility()) {
+    mobile = true;
     mobileOverlay.classList.remove("d-none");
     mobileOverlay.style = "display: flex;";
   } else {
+    mobile = false;
     mobileOverlay.classList.add("d-none");
     mobileOverlay.style = "";
   }

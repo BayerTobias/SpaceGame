@@ -24,7 +24,9 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  height: 100svh;
   width: 100vw;
+  width: 100svw;
   background-image: url("./img/menue/Space3.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -209,6 +211,7 @@ canvas {
 @media (max-width: 730px) {
   canvas {
     width: 100vw;
+    width: 100svw;
   }
 
   h1 {
@@ -235,6 +238,7 @@ canvas {
 @media (max-height: 480px) {
   canvas {
     height: 100vh;
+    height: 100svh;
   }
 
   h1 {
