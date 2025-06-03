@@ -1,0 +1,27 @@
+License Notice for Assets and Code
+==================================
+
+Code License (MIT)
+------------------
+
+All source code in this repository is licensed under the MIT License.
+See LICENSE_CODE.txt for full license details.
+
+Graphics / Assets
+-----------------
+
+This project uses game art assets purchased from CraftPix.net.
+These assets are NOT covered by the MIT License and are subject to the following terms:
+
+- The assets were purchased from https://craftpix.net
+- The license is non-transferable and does not allow redistribution of the asset files
+- You may NOT extract, resell, or distribute the source files (e.g. PNG, PSD, AI, EPS)
+- You may NOT use the art separately or in other projects unless you obtain your own license
+- The assets are used within this project/game as permitted by CraftPix’s license
+
+The full license terms for these assets are available at:
+https://craftpix.net/file-licenses/
+
+If you wish to use the same assets, please purchase a license from CraftPix.net.
+
+Copyright © 2025 Tobias Bayer
